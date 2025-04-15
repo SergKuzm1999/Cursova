@@ -1,18 +1,20 @@
 import React from 'react';
-import { Row } from 'react-bootstrap';
-import NavMenu from './NavMenu';
-import Footer from './Footer';
+import { Grid, Row } from 'react-bootstrap';
+import  NavMenu  from './Navbar/NavMenu';
+import  Footer  from './Footer/Footer';
+
 
 export default props => (
-  <div>
-    <Row style={{ width: "100%", margin: 0, padding: 0 }}>
+
+  <Grid fluid>
+    <Row>
       <NavMenu />
     </Row>
-    <Row style={{ width: "100%", margin: 0, padding: 0 }}>
+    <Row>
       {props.children}
     </Row>
-    <Row style={{ width: "100%", margin: 0, padding: 0 }}>
-      <Footer />
+    <Row>
+      <Footer/>
     </Row>
-  </div>
+  </Grid>
 );  
