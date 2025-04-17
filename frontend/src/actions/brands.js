@@ -10,7 +10,7 @@ export function setBrands(data) {
 
   export function getBrands() {
     return dispatch => {
-      return axios.get('api/brands/getBrands')
+      return axios.get('api/brands/GetBrands')
         .then(res => {
           dispatch(setBrands(res.data));
         })

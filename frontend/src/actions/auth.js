@@ -20,12 +20,12 @@ export function logout() {
     localStorage.removeItem('jwtToken');
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));
-    return axios.post('api/account/logout');
+    return axios.post('api/account/Logout');
   };
 }
 export function login(data) {
   return dispatch => {
-    return axios.post('api/Account/login', data)
+    return axios.post('api/Account/Login', data)
       .then(res => {
         loginByJWT(res.data, dispatch);
       });

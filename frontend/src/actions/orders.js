@@ -21,7 +21,7 @@ export function addOrder(data) {
 
 export function getOrders() {
     return dispatch => {
-        return axios.get('api/orders/all')
+        return axios.get('api/orders/All')
             .then(res => {
                 dispatch(setOrders(res.data, 0));
             })

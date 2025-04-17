@@ -75,7 +75,7 @@ export function getProductsByParams(gender, category, brand, color, size, minpri
 }
 export function newProduct(product) {
   return dispatch => {
-    return axios.post('api/products/newproduct', product)
+    return axios.post('api/products/Newproduct', product)
       .then(res => {
         dispatch(addProduct(res.data));
       })
@@ -99,7 +99,7 @@ export function editProduct(id, product) {
 }
 export function addProductReview(review) {
   return dispatch => {
-    return axios.post('api/products/newreview', review)
+    return axios.post('api/products/Newreview', review)
       .then(res => {
         dispatch(addReview(res.data));
       })
