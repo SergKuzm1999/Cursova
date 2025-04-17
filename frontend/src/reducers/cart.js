@@ -5,7 +5,6 @@ const initialState = {
 };
 
 export default (state = initialState, action = {}) => {
-    console.log("Actions: ", action.type, action.cartProducts);
     switch (action.type) {
         case GET_PRODUCTS_CART:
             return {
@@ -19,7 +18,7 @@ export default (state = initialState, action = {}) => {
             case DELETE_PRODUCT_CART:
             return {
                 ...state,
-                cartProducts:  state.cartProducts.filter(item=>item!=state.cartProducts[action.cartProducts])
+                cartProducts:  state.cartProducts.filter(item=>item!==state.cartProducts[action.cartProducts])
             };
         default: return state;
     }

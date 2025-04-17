@@ -20,36 +20,32 @@ export function logout() {
     localStorage.removeItem('jwtToken');
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));
-};
+    return axios.post('api/account/logout');
+  };
 }
 export function login(data) {
   return dispatch => {
     return axios.post('api/Account/login', data)
-    .then(res => {
-      loginByJWT(res.data, dispatch);
-    });
-}
+      .then(res => {
+        loginByJWT(res.data, dispatch);
+      });
+  }
 }
 const loginByJWT = (token, dispatch) => {
-  var user=jwt.decode(token);
-  localStorage.setItem('jwtToken', token);
-  setAuthorizationToken(token);
-  dispatch(setCurrentUser(user));
-} 
+    var user = jwt.decode(token);
+    localStorage.setItem('jwtToken', token);
+    setAuthorizationToken(token);
+    dispatch(setCurrentUser(user));
+}
 export function register(data) {
-  console.log('--data--', data);
   return dispatch => {
-      return axios.post('api/Account/Register', data)
-          .then(res => {
-              //console.log("data register", res);
-              loginByJWT(res.data, dispatch);
-          });
+    return axios.post('api/Account/Register', data);
   }
 }
 
 export function changeUserName(name) {
   return dispatch => {
-      return dispatch(changeName(name));
+    return dispatch(changeName(name));
   }
 };
 

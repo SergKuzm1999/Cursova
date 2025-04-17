@@ -17,3 +17,11 @@ export function getUsers() {
       });
   }
 }
+  export function GetUserInfoById(userId) {
+    return dispatch => {
+        return axios.get('api/client/GetUserInfoById/'+ userId)
+        .then(res => {
+          dispatch(setUsers(res.data));
+        });
+    }
+}

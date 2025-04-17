@@ -5,7 +5,6 @@ const initialState = {
   };
 
   export default (state = initialState, action = {}) => {
-    console.log("Actions: ", action.type, action.profile);
     switch(action.type) {
       case GET_PROFILE:
         return {

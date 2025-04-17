@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_PRODUCTS, ADD_PRODUCT_REVIEW, NEW_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT} from './types';
+import { GET_PRODUCTS, ADD_PRODUCT_REVIEW, NEW_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT } from './types';
 
 export function setProducts(data) {
   return {
@@ -39,9 +39,17 @@ export function getProducts() {
       })
   }
 }
-export function getNewsProducts() {
+export function getNewsProducts(pagination, gender) {
   return dispatch => {
-    return axios.get('api/products/News')
+    return axios.get('api/products/News/' + pagination + '?gender=' + gender)
+      .then(res => {
+        dispatch(setProducts(res.data));
+      })
+  }
+}
+export function getDiscountsProducts(pagination, gender) {
+  return dispatch => {
+    return axios.get('api/products/Discounts/' + pagination + '?gender=' + gender)
       .then(res => {
         dispatch(setProducts(res.data));
       })
@@ -55,10 +63,11 @@ export function getProductById(id) {
       })
   }
 }
-export function getProductsByParams(gender, category, brand, color, size, minprice, maxprice, name) {
+export function getProductsByParams(gender, category, brand, color, size, minprice, maxprice, name, sort, pagination) {
   return dispatch => {
     return axios.get('api/products/ByParams?gender=' + gender + '&category=' + category + '&brand=' + brand
-      + '&color=' + color + '&size=' + size + '&minprice=' + minprice + '&maxprice=' + maxprice + '&name=' + name)
+      + '&color=' + color + '&size=' + size + '&minprice=' + minprice + '&maxprice=' + maxprice + '&name=' + name + '&sort=' + sort 
+      +'&pagination=' + pagination)
       .then(res => {
         dispatch(setProducts(res.data));
       })
@@ -68,7 +77,6 @@ export function newProduct(product) {
   return dispatch => {
     return axios.post('api/products/newproduct', product)
       .then(res => {
-        console.log(res.data);
         dispatch(addProduct(res.data));
       })
   }

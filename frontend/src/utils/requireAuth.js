@@ -1,23 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from "react-router";
 
 export default function (ComposedComponent) {
   class Authenticate extends React.Component {
     state = {
       redirect: false
     };
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
       let { isAuthenticated } = this.props;
       if (!isAuthenticated) {
-        this.setState({ redirect: true });
+        window.location='/account/signin';
+        this.setState({redirect:true});
       }
     }
     render() {
       return (
-        this.state.redirect ?
-          <Redirect to="/account/signin" /> : 
-          <ComposedComponent {...this.props} />
+       this.state.redirect === false && <ComposedComponent {...this.props} />
       );
     }
   }

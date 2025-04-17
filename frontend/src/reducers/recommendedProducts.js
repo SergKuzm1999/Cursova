@@ -5,7 +5,6 @@ const initialState = {
   };
 
   export default (state = initialState, action = {}) => {
-    console.log("Actions: ", action.type, action.recommended_products);
     switch(action.type) {
       case GET_RECOMMENDED_PRODUCTS:
         return {

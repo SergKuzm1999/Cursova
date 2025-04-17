@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './ProductPage.css';
-import { Row, Col, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, Dot, DotGroup, ImageWithZoom, Image } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import AddReview from './AddReview';
@@ -10,8 +10,10 @@ import { addProductToCart } from '../../../actions/cart';
 import { connect } from "react-redux";
 import Product from '../../Product/Product';
 import { setAlert } from '../../../helpers/setAlert';
-
 import $ from 'jquery';
+import Carousel from 'react-elastic-carousel';
+import axios from 'axios';
+import {Helmet} from "react-helmet";
 
 class ProductPage extends Component {
     constructor(props) {
@@ -20,44 +22,66 @@ class ProductPage extends Component {
             idProduct: 0,
             currentSlide: 0,
             size: '',
-            count: 1
+            count: 1,
+            category_by_subcategory: '',
+            size_input_f_text: '',
+            size_input_s_text: '',
+            simular_products : []
         };
+        this.breakPoints = [
+            { width: 1, itemsToShow: 1, pagination: false },
+            { width: 550, itemsToShow: 2, itemsToScroll: 2, pagination: false },
+            { width: 700, itemsToShow: 3, itemsToScroll: 3 },
+            { width: 850, itemsToShow: 4, itemsToScroll: 4 },
+            { width: 1150, itemsToShow: 4, itemsToScroll: 4 },
+            { width: 1450, itemsToShow: 4, itemsToScroll: 4 },
+            { width: 1750, itemsToShow: 4, itemsToScroll: 4 },
+        ]
     }
     componentDidMount() {
         const { id, category } = this.props.match.params;
         this.setState({ idProduct: id });
         this.props.getProductById(id)
             .then(
-                () => { },
-                (err) => { console.log("Error get data ", err); }
+                () => {},
+                (err) => {
+                    if (err.response.data === 'Не найдено продуктів')
+                        window.location.pathname = '/notFound';
+                }
             );
-        this.props.getRecommendedProducts(category, id)
+        this.props.getRecommendedProducts(category, id, 4, this.props.current_gender)
             .then(
                 () => { },
                 (err) => { console.log("Error get data ", err); }
             );
-    }
 
+        axios.get('api/categories/GetSubcategory_Category/' + this.props.match.params.category).then(
+            res => { this.setState({ category_by_subcategory: res.data }); }
+        );
+        axios.get('/api/products/GetProducts_Similars/' + id).then(
+            res => { this.setState({ simular_products: res.data }); }
+        );
+    }
     imageZoom(type, e) {
         const modal = document.getElementById('modal');
         if (type === 'show') {
             modal.setAttribute('class', 'modal');
             modal.style.display = 'block';
+            document.getElementsByTagName('body')[0].style.overflow = 'hidden';
         }
         if (type === 'hide') {
             modal.style.display = 'block';
             modal.setAttribute('class', ' ');
+            document.getElementsByTagName('body')[0].style.overflow = 'auto';
         }
     }
-
     setCurrentSlide = () => {
         const carousel = document.getElementsByClassName('carousel');
         const slideElements = Array.from(carousel[0].getElementsByClassName("slide___3-Nqo slideHorizontal___1NzNV carousel__slide"));
         slideElements.forEach((element, index) => {
-            element.getAttribute('aria-selected') === 'true' ? this.setState({ currentSlide: index }) : '';
+            if (element.getAttribute('aria-selected') === 'true') this.setState({ currentSlide: index })
         });
     }
-
     hide_show(e, id) {
         const elem = document.getElementById(id);
         if (elem.getAttribute('class') === 'hidden') {
@@ -71,13 +95,11 @@ class ProductPage extends Component {
                 e.target.setAttribute('active', '');
         }
     }
-
     scrollTop(e) {
         e.preventDefault();
         var pos = $('#add-review-form').offset().top - 200;
         $('html,body').animate({ scrollTop: pos }, 1200, 'swing');
     }
-
     animationMoveToCart() {
         const elem = document.getElementsByClassName('move_to_cart')[0];
         const cart_elem = document.getElementById('cart');
@@ -105,15 +127,18 @@ class ProductPage extends Component {
             }
         });
     }
-
     addProductToCart = (e) => {
         e.preventDefault();
         const { cartProducts } = this.props;
         const product = this.props.products;
         const id = product[0].id;
-        const { name, price } = product[0];
+        const { name, newPrice } = product[0];
+        let price = 0;
+        if (newPrice === 0) price = product[0].price;
+        else price = newPrice;
         const image = product[0].images[0].path;
-        const { size, count } = this.state;
+        const { size, count, size_input_f_text, size_input_s_text } = this.state;
+        const sizeInfo = size_input_f_text + ' | ' + size_input_s_text;
         const hrefProduct = `/catalog/${product[0].gender}/${product[0].subcategory.name}/${product[0].brand.name}/p${product[0].id}`;
         if (!cartProducts.find(value => {
             if (value.id === id && value.size === size) {
@@ -123,21 +148,32 @@ class ProductPage extends Component {
                 return false
             }
         })) {
-            setAlert({ message: 'Продукт додано до Кошика', type: 'success' });
-            this.props.addProductToCart({ id, hrefProduct, image, name, price, size, count });
+            setAlert({ message: 'Товар додано до Кошика', type: 'success' });
+            this.props.addProductToCart({ id, hrefProduct, image, name, price, size, sizeInfo, count });
             this.animationMoveToCart();
         }
         else {
-            setAlert({ message: 'Цей продукт уже доданий до Кошика', type: 'danger' });
+            setAlert({ message: 'Товар вже доданий в Кошик', type: 'danger' });
         }
     }
-
+    size_text_change(e) {
+        if (e.target.id === 'size_input_f') this.setState({ size_input_f_text: e.target.value });
+        if (e.target.id === 'size_input_s') this.setState({ size_input_s_text: e.target.value });
+    }
     render() {
-        console.log('tetetetet',this.props.match);
+        const products_dot_images = document.getElementsByClassName('dot-image');
+        if(products_dot_images.length > 0){
+            if(products_dot_images.length <= 4){
+                document.getElementsByClassName('rec-arrow-down')[0].style.display = "none";
+                document.getElementsByClassName('rec-arrow-up')[0].style.display = "none";
+            }
+        }
+        
         const product = this.props.products;
-        const { currentSlide } = this.state;
-
-        const { recommended_products } = this.props;
+        
+        const { currentSlide, category_by_subcategory, size, simular_products } = this.state;
+        const { size_input_f_text, size_input_s_text } = this.state;
+        let { recommended_products } = this.props;
         var sizes = "";
         if (typeof sizes === 'string') {
             sizes = product.length > 0 ? product[0].sizes : '';
@@ -147,162 +183,277 @@ class ProductPage extends Component {
         var rating = 0;
         if (reviews.length > 0) reviews.map((value) => rating = rating + value.rating);
         rating = rating / reviews.length;
+        var sale_procent, saleElement;
+
+        if (product.length > 0) {
+            sale_procent = 100 - (product[0].newPrice * 100 / product[0].price);
+            sale_procent = sale_procent.toString().split('.');
+            saleElement = product[0].newPrice !== 0 ? <div className='sale-product'>-{sale_procent[0]}%</div> : '';
+        }
+        if (product.length > 0) {
+            var descriptionArr = product[0].description.split(';');
+        }
+        if (product.length > 0) {
+            var priceContent;
+            if (product[0].newPrice === 0) {
+                priceContent = <div><h2 className='price'>{product.length > 0 && product[0].price} грн</h2></div>;
+            }
+            else {
+                priceContent = (<div>
+                    <h2 className='price' style={{ color: 'red' }}>{product.length > 0 && product[0].newPrice} грн</h2>
+                    <h4 className='price'><strike>{product.length > 0 && product[0].price} грн</strike></h4>
+                </div>);
+            }
+        }
+        var size_inputs_content = '';
+        if (category_by_subcategory != '') {
+            if (category_by_subcategory === 'clothes') {
+                size_inputs_content = (
+                    <div className='set-size-field'>
+                        <label>Для визначення розміру вкажіть : </label>
+                        <br />
+                        <input type='text' className="form-control" placeholder={'Ваш ріст (см)'}
+                            onChange={(e) => this.size_text_change(e)} id='size_input_f' />
+                        <input type='text' className="form-control" placeholder={'Ваша вага (кг)'}
+                            onChange={(e) => this.size_text_change(e)} id='size_input_s' />
+                    </div>
+                );
+            }
+            if (category_by_subcategory === 'shoes') {
+                size_inputs_content = (
+                    <div className='set-size-field'>
+                        <label>Для визначення розміру вкажіть : </label>
+                        <br />
+                        <input type='text' className="form-control" placeholder={'Довжина устілки (см)'}
+                            onChange={(e) => this.size_text_change(e)} id='size_input_f' style={{ maxWidth: '100%' }} />
+                    </div>
+                );
+            }
+            if (category_by_subcategory !== 'clothes' && category_by_subcategory !== 'shoes') {
+                size_inputs_content = '';
+            }
+        }
+        var size_input_f = document.getElementById("size_input_f");
+        var size_input_s = document.getElementById('size_input_s');
+        var cart_btn_text = 'В КОРЗИНУ';
+        if (size !== '' && size_input_f_text != '') cart_btn_text = 'В КОРЗИНУ';
+        if (size_input_f != null) {
+            if (size_input_s != null) {
+                if (size_input_f_text === '' || size_input_s_text === '')
+                    cart_btn_text = 'Вкажіть дані для визначення розміру';
+            }
+            else{
+                if (size_input_f_text === '')
+                    cart_btn_text = 'Вкажіть дані для визначення розміру';
+            }
+        }
+        if (size === '' && sizes != '') cart_btn_text = 'Виребіть розмір';
+        if (product.length > 0){
+            product[0].name = product[0].name.replace(product[0].brand.name,'');
+            document.title = product[0].name + ' - Clothes4U';
+        }
+        let recommended_products_reserve = [];
+        if(recommended_products.length > 0){
+            for(let i = recommended_products.length-1; i>=0;i--){
+                recommended_products_reserve.push(recommended_products[i]);
+            }
+        }
+        const product_id_now = window.location.pathname.split('/p')[1];
         return (
             <div className='product-page container'>
-                
-                    <Row>
-                        <Col lg={6}>
-                            <div>
-                                <CarouselProvider onClick={this.setCurrentSlide} hasMasterSpinner={true} isPlaying={true} interval={7500} naturalSlideWidth={70} naturalSlideHeight={95}
-                                    totalSlides={product.length > 0 && product[0].images.length}>
-                                    <div>
-                                        <i className='fa fa-search-plus' onClick={(e) => this.imageZoom('show', e)}></i>
-                                    </div>
-                                    <Slider>
-                                        {product.length > 0 && product[0].images.map((value, index, array) =>
-                                            <Slide key={index} index={index}><ImageWithZoom index={index} src={value.path} /></Slide>)}
-                                    </Slider>
-                                    <ButtonBack className='button-move back' />
-                                    <ButtonNext className='button-move next' />
+                <Helmet>
+                    <meta name="Description" content={`Купити ${product.length > 0 && product[0].name} по величезних знижках. Інтернет-магазин Clothes4U. Оплата після огляду. Доставка по Україні за 24 години.`} />
+                    <meta name="Description" content={`${product.length > 0 && product[0].name}`} />
+                </Helmet>
+                <div className='row'>
+                    <div className='col col-lg-6 col-md-6 col-sm-12 col-12'>
+                        <div>
+                            <CarouselProvider onClick={this.setCurrentSlide} hasMasterSpinner={true} isPlaying={false}
+                                interval={7500} naturalSlideWidth={70} naturalSlideHeight={95}
+                                totalSlides={product.length > 0 && product[0].images.length}>
+                                {saleElement}
+                                <div>
+                                    <i className='fa fa-search-plus' onClick={(e) => this.imageZoom('show', e)}></i>
+                                </div>
+                                <Slider>
+                                    {product.length > 0 && product[0].images.map((value, index, array) =>
+                                        <Slide key={index} index={index}><ImageWithZoom index={index} src={value.path} onClick={(e) => this.imageZoom('show', e)} /></Slide>)}
+                                </Slider>
+                                <ButtonBack className='button-move back' />
+                                <ButtonNext className='button-move next' />
 
-                                    <DotGroup className='dot-group' />
-                                    <div className='dot-group-image' >
+                                <DotGroup className='dot-group' />
+                                <div className='dot-group-image' >
+                                    <Carousel verticalMode={true} itemsToShow={4} itemToScroll={1}
+                                        enableSwipe={false} enableMouseSwipe={false} focusOnSelect={true}>
                                         {product.length > 0 && product[0].images.map((value, index, array) =>
-                                            <div>
+                                            <div key={index}>
                                                 <Dot slide={index} className='dot-image'>
                                                     <Image
                                                         src={value.path}>
                                                     </Image>
                                                 </Dot>
-                                                {index === 0 && <img src={value.path} style={{ visibility: 'hidden' }} className='move_to_cart' />}
+                                                {index === 0 && <img alt={value} src={value.path} style={{ visibility: 'hidden' }} className='move_to_cart' />}
                                             </div>
                                         )}
-                                    </div>
-                                </CarouselProvider>
-                            </div>
-                            <div id='modal'>
+                                    </Carousel>
+                                </div>
+                            </CarouselProvider>
+                        </div>
+                        <div id='modal'>
+                            <div className='row'>
                                 <CarouselProvider hasMasterSpinner={true} currentSlide={currentSlide} naturalSlideWidth={70} naturalSlideHeight={93}
                                     totalSlides={product.length > 0 && product[0].images.length}>
                                     <Slider>
                                         {product.length > 0 && product[0].images.map((value, index, array) =>
-                                            <Slide key={value} index={index + 1}><ImageWithZoom src={value.path} /></Slide>)}
+                                            <Slide key={index} index={index + 1}><ImageWithZoom src={value.path} /></Slide>)}
                                     </Slider>
                                     <ButtonBack className='button-move back' />
                                     <ButtonNext className='button-move next' />
                                     <button type='button' onClick={() => this.imageZoom('hide', null)} className='close-modal'><i className="fa fa-times"></i></button>
                                 </CarouselProvider>
                             </div>
-                        </Col>
-                        <Col lg={6}>
-                        
-                            <div className='content'>
+                        </div>
+                    </div>
+                    <div className='col col-lg-6 col-md-6 col-sm-12 col-12'>
+                        <div className='content'>
                             <form onSubmit={this.addProductToCart}>
-                                <div><h2 className='title'>{product.length > 0 && product[0].name} /{product.length > 0 && product[0].brand.name}</h2></div>
-                                <div><h2 className='price'>{product.length > 0 && product[0].price} грн</h2></div>
+                                <div>
+                                    <h1 className='title'>
+                                        {product.length > 0 && product[0].name} 
+                                        {product.length > 0 ? product[0].brand.name !== "Без бренду" && " / " : ''} 
+                                        {product.length > 0 ? product[0].brand.name !== "Без бренду" && product[0].brand.name : ''}
+                                    </h1>
+                                </div>
+                                {priceContent}
                                 <div className='review'>
-                                    {rating >= 1 ? <i style={{ color: 'rgb(44, 44, 44)' }} class="fa fa-star"></i> : <i class="fa fa-star"></i>}
-                                    {rating >= 2 ? <i style={{ color: 'rgb(44, 44, 44)' }} class="fa fa-star"></i> : <i class="fa fa-star"></i>}
-                                    {rating >= 3 ? <i style={{ color: 'rgb(44, 44, 44)' }} class="fa fa-star"></i> : <i class="fa fa-star"></i>}
-                                    {rating >= 4 ? <i style={{ color: 'rgb(44, 44, 44)' }} class="fa fa-star"></i> : <i class="fa fa-star"></i>}
-                                    {rating >= 5 ? <i style={{ color: 'rgb(44, 44, 44)' }} class="fa fa-star"></i> : <i class="fa fa-star"></i>}
+                                    {rating >= 1 ? <i style={{ color: 'rgb(44, 44, 44)' }} className="fa fa-star"></i> :
+                                        <i className="fa fa-star"></i>}
+                                    {rating >= 2 ? <i style={{ color: 'rgb(44, 44, 44)' }} className="fa fa-star"></i> :
+                                        <i className="fa fa-star"></i>}
+                                    {rating >= 3 ? <i style={{ color: 'rgb(44, 44, 44)' }} className="fa fa-star"></i> :
+                                        <i className="fa fa-star"></i>}
+                                    {rating >= 4 ? <i style={{ color: 'rgb(44, 44, 44)' }} className="fa fa-star"></i> :
+                                        <i className="fa fa-star"></i>}
+                                    {rating >= 5 ? <i style={{ color: 'rgb(44, 44, 44)' }} className="fa fa-star"></i> :
+                                        <i className="fa fa-star"></i>}
                                     <span>
                                         {reviews.length + ' відгуків'}
                                     </span>
                                 </div>
-
-                                {product.length > 0 && product[0].sizeImage.categoryName != 'none' &&
-                                    <div className='size-grid'>
-                                        <button type='button' onClick={(e) => { this.hide_show(e, 'size-grid-div') }}>РОЗМІРНА СІТКА</button>
-                                        <div id='size-grid-div' className='hidden'>
-                                            <img width='100%' alt='size-grid-img'
-                                                src={product.length > 0 && product[0].sizeImage.path} />
-                                        </div>
-                                    </div>}
+                                <div className='color-products'>
+                                    {simular_products.length > 0 && simular_products[0].map((value)=>
+                                        value.id != product_id_now &&
+                                            <a href={`${window.location.pathname.replace(product_id_now,value.id)}`} key={value.id}>
+                                                <img src={value.images[0].path} alt={value.id}/>
+                                            </a>
+                                    )}
+                                </div>
                                 <div className='size'>
                                     {sizes != '' ?
                                         <span>Розмір:</span> : ''}
                                     <br />
                                     {typeof sizes === 'object' &&
-                                        sizes.map((value) => <input type='radio'
+                                        sizes.map((value, index) => <input type='radio'
                                             onClick={(e) => { this.setState({ size: e.target.value }) }}
-                                            value={value} name='size' id={`size-${value}`} />)}
+                                            value={value} name='size' id={`size-${value}`} key={index} />)}
                                 </div>
+                                {size_inputs_content}
                                 <div className='counter'>
-                                    <Row>
-                                        <Col lg={4}>
-                                            <div className='button-number'>
-                                                <Button type='button' onClick={() => { this.setState({ count: this.state.count > 1 ? this.state.count - 1 : this.state.count }) }} id='decrement'>-</Button>
-                                                <input type='text' value={this.state.count} />
-                                                <Button type='button' onClick={() => { this.setState({ count: this.state.count + 1 }) }} id='increment'>+</Button>
+                                    <div className='row'>
+                                        <div className='col col-lg-4 col-md-5 col-sm-4 col-12'>
+                                            <div className='button-number row'>
+                                                <div className='col col-'>
+                                                    <Button type='button' onClick={() => {
+                                                        if (this.state.count > 1) {
+                                                            this.setState({ count: this.state.count - 1 });
+                                                            document.getElementById('count_input').value = this.state.count - 1;
+                                                        }
+                                                        else {
+                                                            this.setState({ count: this.state.count });
+                                                            document.getElementById('count_input').value = this.state.count;
+                                                        }
+                                                    }}
+                                                        id='decrement'>-</Button>
+                                                </div>
+                                                <div className='col col-'>
+                                                    <input type='text' id='count_input' defaultValue='1' />
+                                                </div>
+                                                <div className='col col-'>
+                                                    <Button type='button' onClick={() => {
+                                                        this.setState({ count: this.state.count + 1 });
+                                                        document.getElementById('count_input').value = this.state.count + 1
+                                                    }}
+                                                        id='increment'>+</Button>
+                                                </div>
                                             </div>
-                                        </Col>
-                                        <Col lg={8}>
-                                            <Button type="submit" disabled={sizes.length > 0 && this.state.size === ''} className='order-btn'>
-                                                {this.state.size != '' ? 'В КОРЗИНУ' : sizes.length > 0 ? 'Виберіть розмір' : 'В КОРЗИНУ'}
+                                        </div>
+                                        <div className='col col-lg-8 col-md-7 col-sm-8 col-12'>
+                                            <Button type="submit" disabled={cart_btn_text !== 'В КОРЗИНУ'} className='order-btn'>
+                                                {cart_btn_text}
                                             </Button>
-                                        </Col>
-                                    </Row>
-                                </div>
-                                </form>
-                                <div className='description'>
-                                    <p>{product.length > 0 && product[0].description}</p>
-                                </div>
-                                <div className='add-review'>
-                                    <Button type='button' onClick={() => this.hide_show(null, 'new-review')}>ВІДГУКІВ ({reviews.length >= 0 && reviews.length})</Button>
-                                    <div className='hidden' id='new-review'>
-                                        <div className='reviews'>
-                                            <span>ВІДГУКИ КЛІЄНТІВ</span>
-                                            <span style={{ float: 'right', cursor: 'pointer' }} onClick={this.scrollTop}>Написати відгук</span>
-                                            {reviews.length > 0 && reviews.map((value) =>
-                                                <Row>
-                                                    <Col lg={2}>
-                                                        <div className='fa fa-user' />
-                                                    </Col>
-                                                    <Col lg={7}>
-                                                        <div>
-                                                            {value.rating >= 1 ? <div style={{ color: 'rgb(44, 44, 44)' }} class="fa fa-star" /> :
-                                                                <div class="fa fa-star" style={{ color: 'rgb(207, 207, 207)' }} />}
-                                                            {value.rating >= 2 ? <div style={{ color: 'rgb(44, 44, 44)' }} class="fa fa-star" /> :
-                                                                <div class="fa fa-star" style={{ color: 'rgb(207, 207, 207)' }} />}
-                                                            {value.rating >= 3 ? <div style={{ color: 'rgb(44, 44, 44)' }} class="fa fa-star" /> :
-                                                                <div class="fa fa-star" style={{ color: 'rgb(207, 207, 207)' }} />}
-                                                            {value.rating >= 4 ? <div style={{ color: 'rgb(44, 44, 44)' }} class="fa fa-star" /> :
-                                                                <div class="fa fa-star" style={{ color: 'rgb(207, 207, 207)' }} />}
-                                                            {value.rating >= 5 ? <div style={{ color: 'rgb(44, 44, 44)' }} class="fa fa-star" /> :
-                                                                <div class="fa fa-star" style={{ color: 'rgb(207, 207, 207)' }} />}
-                                                        </div>
-                                                        <div className='name'>
-                                                            {value.name} {value.date}
-                                                        </div>
-                                                        <div className='text'>
-                                                            {value.text}
-                                                        </div>
-                                                    </Col>
-                                                </Row>)}
-                                                <AddReview idProduct={this.state.idProduct} />
                                         </div>
                                     </div>
                                 </div>
+                            </form>
+                            <div className='description'>
+                                {product.length > 0 && descriptionArr.map((item, index) => {
+                                    return <p key={index}>{item}</p>
+                                })}
                             </div>
-                        
-                        </Col>
-                    </Row>
-               
-               
+                            <div className='add-review'>
+                                <Button type='button' onClick={() => this.hide_show(null, 'new-review')}>
+                                    ВІДГУКІВ ({reviews.length >= 0 && reviews.length})
+                                </Button>
+                                <div className='hidden' id='new-review'>
+                                    <div className='reviews'>
+                                        <span>ВІДГУКИ КЛІЄНТІВ</span>
+                                        <span style={{ float: 'right', cursor: 'pointer' }} onClick={this.scrollTop}>Написати відгук</span>
+                                        {reviews.length > 0 && reviews.map((value, index) =>
+                                            <div className='row' key={index}>
+                                                <div className='col col-lg-2 col-3 col-sm-2 col-md-3'>
+                                                    <div className='fa fa-user' />
+                                                </div>
+                                                <div className='col col-lg-10 col-9 col-sm-10 col-md-9'>
+                                                    <div>
+                                                        {value.rating >= 1 ? <div style={{ color: 'rgb(44, 44, 44)' }} className="fa fa-star" /> :
+                                                            <div className="fa fa-star" style={{ color: 'rgb(207, 207, 207)' }} />}
+                                                        {value.rating >= 2 ? <div style={{ color: 'rgb(44, 44, 44)' }} className="fa fa-star" /> :
+                                                            <div className="fa fa-star" style={{ color: 'rgb(207, 207, 207)' }} />}
+                                                        {value.rating >= 3 ? <div style={{ color: 'rgb(44, 44, 44)' }} className="fa fa-star" /> :
+                                                            <div className="fa fa-star" style={{ color: 'rgb(207, 207, 207)' }} />}
+                                                        {value.rating >= 4 ? <div style={{ color: 'rgb(44, 44, 44)' }} className="fa fa-star" /> :
+                                                            <div className="fa fa-star" style={{ color: 'rgb(207, 207, 207)' }} />}
+                                                        {value.rating >= 5 ? <div style={{ color: 'rgb(44, 44, 44)' }} className="fa fa-star" /> :
+                                                            <div className="fa fa-star" style={{ color: 'rgb(207, 207, 207)' }} />}
+                                                    </div>
+                                                    <div className='name'>
+                                                        {value.userName} {value.date}
+                                                    </div>
+                                                    <div className='text'>
+                                                        {value.text}
+                                                    </div>
+                                                </div>
+                                            </div>)}
+                                        <AddReview idProduct={this.state.idProduct} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <hr />
                 {recommended_products.length > 0 ?
                     <div className='recomended-products'>
-                        <h4>РЕКОМЕНДОВАНІ ТОВАРИ</h4>
-                        <Row style={{ margin: '25px 0px 25px 0px' }}>
-                            {/* NEED FIX TO GET NOT ALL PRODUCTS FROM SERVER  @index < 4@*/}
-                            {recommended_products.map((value, index) =>
-                                index < 4 &&
-                                <Col sm={12} md={3} className='product' >
-                                    <Product product={value} key={index} />
-                                </Col>)}
-                        </Row>
-                    </div> :
-                    ''}
+                        <h4>СХОЖІ ТОВАРИ</h4>
+                        <Carousel enableAutoPlay={false} breakPoints={this.breakPoints}
+                            enableMouseSwipe={false} itemPadding={[0, 10]}>
+                            {recommended_products_reserve.map((value, index) =>
+                                <section key={index}>
+                                    <Product product={value} />
+                                </section>)}
+                        </Carousel>
+                    </div> : ''}
             </div>
         );
     }
@@ -311,7 +462,8 @@ const mapStateToProps = (state) => {
     return {
         products: state.products.products,
         cartProducts: state.cartProducts.cartProducts,
-        recommended_products: state.recommended_products.recommended_products
+        recommended_products: state.recommended_products.recommended_products,
+        current_gender: state.current_gender.current_gender
     };
 }
 export default connect(mapStateToProps, { getProductById, addProductToCart, getRecommendedProducts })(ProductPage);

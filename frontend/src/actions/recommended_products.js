@@ -7,12 +7,12 @@ export function setRecommendedProducts(data) {
     recommended_products: data
   }
 }
-export function getRecommendedProducts(category,currentProductId) {
+export function getRecommendedProducts(category,currentProductId,pagination, gender_now) {
+ 
   return dispatch => {
-    return axios.get('api/products/ByParams?category=' + category)
+    return axios.get('api/products/ByParams?category=' + category +'&gender=' + gender_now + '&pagination='+pagination)
       .then(res => {
-        res.data = res.data.filter(function (value) { if (value[0].id != currentProductId) return value });
-        console.log('res-data', res.data);
+        res.data = res.data.products.filter(value =>  value[0].id !== parseInt(currentProductId,10) );
         dispatch(setRecommendedProducts(res.data));
       })
   }

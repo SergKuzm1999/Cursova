@@ -1,13 +1,1 @@
-.service .header{
-    margin-top:50px;
-}
-.service .header:last-child{
-    margin-bottom:50px;
-}
-.service .header p{
-    margin-top:-1px;
-    color:rgb(90, 90, 90);
-}
-.service b{
-    color:black;
-}
+.service .header{margin-top:50px}.service .header:last-child{margin-bottom:50px}.service .header p{margin-top:-1px;color:#2c2c2c}.service b{color:#000}.service h1{width:100%;text-align:center;text-transform:uppercase;letter-spacing:5px;color:#000;font-size:30px}@media (max-width:1000px){.service h1{font-size:27px}}@media (max-width:770px){.service h1{font-size:23px;letter-spacing:4px}}@media (max-width:550px){.service h1{font-size:20px;letter-spacing:0}}

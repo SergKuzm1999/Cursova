@@ -6,20 +6,26 @@ import recommended_products from '../reducers/recommendedProducts';
 import auth from "../reducers/auth";
 import users from "../reducers/users";
 import categories from "../reducers/categories";
-import order from "../reducers/order";
+import orders from "../reducers/orders";
 import profile from "../reducers/profile";
 import cartProducts from "../reducers/cart";
+import reviews from '../reducers/reviews';
+import brands from '../reducers/brands';
+import current_gender from '../reducers/current_gender';
 
 export default function configureStore(history, initialState) {
   const reducers = {
     products,
+    reviews,
     auth,
     users,
     categories,
-    order,
+    orders,
     profile,
     cartProducts,
-    recommended_products
+    recommended_products,
+    brands,
+    current_gender
     };
 
   const middleware = [

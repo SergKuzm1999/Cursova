@@ -1,11 +1,10 @@
-import { GET_PRODUCTS, ADD_PRODUCT_REVIEW, NEW_PRODUCT, EDIT_PRODUCT, GET_SEARCH_PRODUCTS} from '../actions/types';
+import { GET_PRODUCTS, ADD_PRODUCT_REVIEW, NEW_PRODUCT, EDIT_PRODUCT} from '../actions/types';
 
 const initialState = {
     products: []
   };
 
   export default (state = initialState, action = {}) => {
-    console.log("Actions: ", action.type, action.products);
     switch(action.type) {
       case GET_PRODUCTS:
         return {

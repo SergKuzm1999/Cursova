@@ -4,39 +4,60 @@ import { Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { addProductReview } from '../../../actions/products';
 import classnames from 'classnames';
+import { GetUserInfoById } from '../../../actions/users';
+import { setAlert } from '../../../helpers/setAlert';
 
 class AddReview extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
             text: '',
             rating: 0,
             date: new Date(),
-            errors:{}
+            errors: {},
+            userName: ''
         };
     }
+    componentDidMount() {
+        const { user_id } = this.props;
+        if (user_id !== undefined) {
+            this.props.GetUserInfoById(user_id).then(
+                () => { this.setState({ userName: this.props.users.firstName + ' ' + this.props.users.lastName }) }
+            );
+        }
+
+    }
     AddReview = (e) => {
-        
-        let errors = {};
-        if (this.state.name === ''||this.state.name.length>25||this.state.name.length<3) errors.name = "Ім'я повинно бути від 3 до 25 символів!"
-        if (this.state.text === ''||this.state.text.length>200||this.state.text.length<10) errors.text = "Текст відгуку повинен бути від 10 до 200 символів!"
-        if (this.state.rating === 0) errors.rating = "Будь ласка, виберіть оцінку!"
-        const isValid = Object.keys(errors).length === 0;
-        if (isValid) {
-            const { name,text,rating } = this.state;
-            var {date} = this.state;
-            date = date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear();
-            const productId = this.props.idProduct;
-            this.props.addProductReview({productId ,name,text,rating})
-                .then(
-                    () => { }
-                )
-                .then(this.setState({ errors }))
+        e.preventDefault();
+        if (this.props.user_id !== undefined) {
+            let errors = {};
+            if (this.state.userName === '' || this.state.userName.length > 25 || this.state.userName.length < 3) errors.userName = "Ім'я повинно бути від 3 до 25 символів!"
+            if (this.state.text === '' || this.state.text.length > 200 || this.state.text.length < 10) errors.text = "Текст відгуку повинен бути від 10 до 200 символів!"
+            if (this.state.rating === 0) errors.rating = "Будь ласка, виберіть оцінку!"
+            const isValid = Object.keys(errors).length === 0;
+            if (isValid) {
+                const { userName, text, rating } = this.state;
+
+                const productId = this.props.idProduct;
+                this.props.addProductReview({ productId, userName, text, rating })
+                    .then(
+                        () => {
+                            setAlert({ message: 'Відгук відправлено', type: 'success' });
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 1500);
+
+                        }
+                    )
+                    .then(this.setState({ errors }))
+            }
+            else {
+                this.setState({ errors });
+                e.preventDefault();
+            }
         }
         else {
-            this.setState({ errors });
-            e.preventDefault();
+            setAlert({ message: 'Увійдіть до кабінету', type: 'danger' });
         }
     }
     handleChange = (e) => {
@@ -57,7 +78,7 @@ class AddReview extends Component {
                     }
                 }
                 break;
-            };
+            }
             case 'hover': {
                 elem = e.target;
                 id = parseInt(elem.getAttribute('rating'), 10);
@@ -76,7 +97,7 @@ class AddReview extends Component {
             case 'click': {
                 elem = e.target;
                 id = parseInt(elem.getAttribute('rating'), 10);
-                this.setState({rating:id});
+                this.setState({ rating: id });
                 for (i = 0; i < id; i++) {
                     arr[i].style.color = 'rgb(44, 44, 44)';
                     arr[i].setAttribute('canChange', 'false');
@@ -113,39 +134,44 @@ class AddReview extends Component {
         const { errors } = this.state;
         return (
             <div id='add-review-form'>
-                <form onSubmit={this.AddReview}>
+                <form onSubmit={(e) => this.AddReview(e)}>
                     <h3>Написати відгук</h3>
-                    <input type="text" id='name' name='name' value={this.state.name} onChange={this.handleChange}
-                        className={classnames('form-control', { 'error': !!errors.name })}  placeholder="Ваше ім'я" />
-                    {!!errors.name ? <span className="help-block">{errors.name}</span> : ''}
-                    <textarea className={classnames('form-control', { 'error': !!errors.text })}  
+                    <input type="text" id='userName' name='userName' defaultValue={this.state.userName}
+                        className='form-control' placeholder="Ваше ім'я" onChange={this.handleChange} />
+                    {!!errors.userName ? <span className="help-block">{errors.userName}</span> : ''}
+                    <textarea className={classnames('form-control', { 'error': !!errors.text })}
                         id='text' value={this.state.text} name='text' onChange={this.handleChange} placeholder="Ваш відгук" />
                     {!!errors.text ? <span className="help-block">{errors.text}</span> : ''}
                     <span>ОЦІНКА</span><br />
                     <span id='rating' onMouseLeave={() => this.choiceRatingComment('leave', null)}>
-                        <i canChange='true' onMouseEnter={(e) => this.choiceRatingComment('hover', e)}
+                        <i canchange='true' onMouseEnter={(e) => this.choiceRatingComment('hover', e)}
                             onClick={(e) => this.choiceRatingComment('click', e)}
-                            class="fa fa-star" rating='1'></i>
-                        <i canChange='true' onMouseEnter={(e) => this.choiceRatingComment('hover', e)}
+                            className="fa fa-star" rating='1'></i>
+                        <i canchange='true' onMouseEnter={(e) => this.choiceRatingComment('hover', e)}
                             onClick={(e) => this.choiceRatingComment('click', e)}
-                            class="fa fa-star" rating='2'></i>
-                        <i canChange='true' onMouseEnter={(e) => this.choiceRatingComment('hover', e)}
+                            className="fa fa-star" rating='2'></i>
+                        <i canchange='true' onMouseEnter={(e) => this.choiceRatingComment('hover', e)}
                             onClick={(e) => this.choiceRatingComment('click', e)}
-                            class="fa fa-star" rating='3'></i>
-                        <i canChange='true' onMouseEnter={(e) => this.choiceRatingComment('hover', e)}
+                            className="fa fa-star" rating='3'></i>
+                        <i canchange='true' onMouseEnter={(e) => this.choiceRatingComment('hover', e)}
                             onClick={(e) => this.choiceRatingComment('click', e)}
-                            class="fa fa-star" rating='4'></i>
-                        <i canChange='true' onMouseEnter={(e) => this.choiceRatingComment('hover', e)}
+                            className="fa fa-star" rating='4'></i>
+                        <i canchange='true' onMouseEnter={(e) => this.choiceRatingComment('hover', e)}
                             onClick={(e) => this.choiceRatingComment('click', e)}
-                            class="fa fa-star" rating='5'></i>
+                            className="fa fa-star" rating='5'></i>
                     </span>
                     {!!errors.rating ? <span className="help-block">{errors.rating}</span> : ''}
                     <br />
-                    <Button style={{marginBottom:'15px'}}type="submit">ВІДПРАВИТИ ВІДГУК</Button>
+                    <Button style={{ marginBottom: '15px' }} type="submit">ВІДПРАВИТИ ВІДГУК</Button>
                 </form>
             </div>
         );
     }
 }
-
-export default connect(null, { addProductReview })(AddReview)
+const mapStateToProps = (state) => {
+    return {
+        user_id: state.auth.user.id,
+        users: state.users.users
+    };
+}
+export default connect(mapStateToProps, { GetUserInfoById, addProductReview })(AddReview)

@@ -1,5 +1,5 @@
 import { GET_PRODUCTS_CART, ADD_PRODUCT_CART, DELETE_PRODUCT_CART } from './types';
-let cart = [];
+let cart;
 
 export function setProducts(cartProducts) {
   return {
@@ -24,14 +24,14 @@ export function deleteProduct(id) {
 
 export function getCartProducts(cart) {
   return dispatch => {
-    console.log('---------------------------',cart);
     dispatch(setProducts(cart));
   }
 }
 export function addProductToCart(cartProduct) {
   return dispatch => {
     let currentStorage = JSON.parse(localStorage.getItem('cart'));
-    currentStorage!=null?cart=currentStorage:'';
+    cart = currentStorage;
+    if (cart === null) cart = [];
     cart.push(cartProduct);
     localStorage.setItem('cart', JSON.stringify(cart));
     dispatch(addProduct(cartProduct));
@@ -40,8 +40,13 @@ export function addProductToCart(cartProduct) {
 export function deleteProductByCart(id) {
   return dispatch => {
     let cart = JSON.parse(localStorage.getItem('cart'));
-    cart.splice(cart[id],1);
+    cart.splice(cart[id], 1);
     localStorage.setItem('cart', JSON.stringify(cart));
     dispatch(deleteProduct(id));
+  }
+}
+export function clearCart() {
+  return dispatch => {
+    localStorage.removeItem('cart');
   }
 }

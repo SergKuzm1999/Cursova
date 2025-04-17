@@ -4,6 +4,8 @@ import classnames from 'classnames';
 import { connect } from "react-redux";
 import { changeAddress,getProfile } from "../../../../actions/profile";
 import './ChangeAddress.css';
+import '../EditInfoPage/EditInformation.css';
+import { setAlert } from '../../../../helpers/setAlert';
 
 class ChangeAddress extends Component {
     constructor(props) {
@@ -25,19 +27,18 @@ class ChangeAddress extends Component {
                 (err) => { console.log("Error get data ", err); }
             )
     }
-    componentDidUpdate(){
-        this.setStateProfile();
+    UNSAFE_componentWillUpdate(){
+        if(Object.keys(this.props.profile).length > 0)this.setStateProfile();
     }
     setStateProfile(){
-        const state = this.state;
         const {profile} = this.props;
-        if(state.clientId === '')
+        if(this.state.clientId === '')
         this.setState({clientId: profile.id});
-        if(state.region === '')
+        if(this.state.region === '')
         this.setState({region: profile.region});
-        if(state.city === '')
+        if(this.state.city === '')
         this.setState({city: profile.city});
-        if(state.numberDelivery === '')
+        if(this.state.numberDelivery === '')
         this.setState({numberDelivery: profile.numberDelivery});
     }
     setStateByErrors = (name, value) => {
@@ -70,9 +71,13 @@ class ChangeAddress extends Component {
             this.setState({ isLoading: true });
              this.props.changeAddress(clientId,{clientId, region, city, numberDelivery })
                  .then(
-                     () => this.setState({ done: true }),
+                     () =>{ 
+                         this.setState({ done: true });
+                         setAlert({ message: 'Данні успішно змінено', type: 'success' });
+                    },
                      (err) => {
                          this.setState({ errors: err.response.data, isLoading: false });
+                         setAlert({ message: 'Данні не змінено!', type: 'danger' });
                      }
                  );
         }
@@ -107,7 +112,7 @@ class ChangeAddress extends Component {
                                 {!!errors.city ? <span className="help-block">{errors.city}</span> : ''}
                             </div>
                             <div className={classnames('form-group', { 'error': !!errors.numberDelivery })}>
-                                <label>ВІДДІЛЕННЯ НОВОЇ ПОЧТИ</label>
+                                <label>ВІДДІЛЕННЯ НОВОЇ ПОШТИ</label>
                                 <input type="text" className="form-control" placeholder="Введіть Відділення Нової Почти"
                                     id="numberDelivery"
                                     name="numberDelivery"
@@ -116,12 +121,7 @@ class ChangeAddress extends Component {
                                 {!!errors.numberDelivery ? <span className="help-block">{errors.numberDelivery}</span> : ''}
                             </div>
                             <button type='submit'>ЗМІНИТИ</button>
-                            {!!errors.invalid ?
-                            <div className="alert alert-danger">
-                                {errors.invalid}.
-                    </div> : isLoading ? <div className="alert alert-success">Адресу успішно змінено</div> : ''}
                         </div>
-                        
                     </form>
 
                 </Row>

@@ -1,3 +1,5 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /admin/
+Allow: /
+Host: https://clothes4u.com.ua/
+Sitemap: https://clothes4u.com.ua/sitemap.xml

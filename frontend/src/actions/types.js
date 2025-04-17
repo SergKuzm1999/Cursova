@@ -12,6 +12,7 @@ export const GET_USERS = 'GET_USERS';
 
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 
+export const GET_ORDERS = 'GET_ORDERS';
 export const NEW_ORDER = 'NEW_ORDER';
 
 export const GET_PROFILE = 'GET_PROFILE';
@@ -23,4 +24,9 @@ export const GET_PRODUCTS_CART = 'GET_PRODUCTS_CART';
 export const ADD_PRODUCT_CART = 'ADD_PRODUCT_CART';
 export const DELETE_PRODUCT_CART = 'DELETE_PRODUCT_CART';
 
+export const GET_REVIEWS ='GET_REVIEWS';
+export const GET_BRANDS = 'GET_BRANDS';
+
+export const GET_CURRENT_GENDER = 'GET_CURRENT_GENDER';
+export const CHANGE_CURRENT_GENDER = 'CHANGE_CURRENT_GENDER';
 
