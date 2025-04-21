@@ -20,12 +20,12 @@ export function logout() {
     localStorage.removeItem('jwtToken');
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));
-    return axios.post('api/account/Logout');
+    return axios.post('Account/Logout');
   };
 }
 export function login(data) {
   return dispatch => {
-    return axios.post('api/Account/Login', data)
+    return axios.post('Account/Login', data)
       .then(res => {
         loginByJWT(res.data, dispatch);
       });
@@ -39,7 +39,7 @@ const loginByJWT = (token, dispatch) => {
 }
 export function register(data) {
   return dispatch => {
-    return axios.post('api/Account/Register', data);
+    return axios.post('Account/Register', data);
   }
 }
 

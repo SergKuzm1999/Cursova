@@ -10,7 +10,7 @@ import Inputmask from "inputmask";
 import $ from 'jquery';
 import axios from 'axios';
 import {Helmet} from "react-helmet";
-const API_KEY = '9edb8ec09d20ebd7265372e6a7498bb4';
+const API_KEY = 'cab844dbc4adcfd761fa2cacd7410621';
 
 class SignUpPage extends Component {
     constructor(props) {
@@ -18,7 +18,6 @@ class SignUpPage extends Component {
         this.state = {
             firstName: '',
             lastName: '',
-            surName: '',
             email: '',
             password: '',
             phoneNumber: '',
@@ -133,7 +132,6 @@ class SignUpPage extends Component {
         let errors = {};
         if (this.state.lastName === '') errors.lastName = "Прізвище повинно бути від 1 до 32 символів!";
         if (this.state.firstName === '') errors.firstName = "Ім'я повинне бути від 1 до 32 символів!";
-        if (this.state.surName === '') errors.surName = "По Батькові повинне бути від 1 до 32 символів!";
         if (this.state.password === '') errors.password = "Введіть пароль!";
         if (this.state.email === '') errors.email = "Некоректний адрес електронної пошти!";
         if (this.state.phoneNumber === '' ) errors.phoneNumber = "Не коректний телефон!";
@@ -219,15 +217,6 @@ class SignUpPage extends Component {
                                         value={this.state.firstName}
                                         onChange={this.handleChange} />
                                     {!!errors.firstName ? <span className="help-block">{errors.firstName}</span> : ''}
-                                </div>
-                                <div className={classnames('form-group', { 'error': !!errors.surName })}>
-                                    <label>ПО БАТЬКОВІ</label>
-                                    <input type="text" className="form-control"
-                                        id="surName"
-                                        name="surName"
-                                        value={this.state.surName}
-                                        onChange={this.handleChange} />
-                                    {!!errors.surName ? <span className="help-block">{errors.surName}</span> : ''}
                                 </div>
                                 <div className={classnames('form-group', { 'error': !!errors.email })}>
                                     <label >EMAIL</label>
