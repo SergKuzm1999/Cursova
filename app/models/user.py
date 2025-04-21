@@ -1,8 +1,9 @@
 from app.models import db
 from datetime import datetime
-from sqlalchemy import Boolean
+from flask_login import UserMixin
+from werkzeug.security import check_password_hash
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -11,10 +12,27 @@ class User(db.Model):
     last_name = db.Column(db.String(100), nullable=True)
     region = db.Column(db.String(100), nullable=True)
     city = db.Column(db.String(100), nullable=True)
-    number_delivery = db.Column(db.Integer, nullable=True)
+    number_delivery = db.Column(db.String(100), nullable=True)
     date = db.Column(db.DateTime, default=datetime.now, nullable=False)
     code_forgot_password = db.Column(db.String(100), nullable=True)
     phone = db.Column(db.String(20), unique=True, nullable=True)
     role = db.Column(db.String(100), nullable=False)
-    isConfirmed = db.Column(db.Boolean, default=False, nullable=False)
+    is_Confirmed = db.Column(db.Boolean, default=False, nullable=True)
+    code_confirm_email = db.Column(db.Integer, nullable=True)
     orders = db.relationship('Order', backref='user', lazy=True)
+
+    is_active = db.Column(db.Boolean, default=True)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+    
+    def get_id(self):
+        return str(self.id)
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+        }

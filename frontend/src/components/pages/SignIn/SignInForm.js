@@ -46,10 +46,10 @@ class SignInForm extends Component {
         if (isValid) {
             const { email, password } = this.state;
             this.setState({ isLoading: true });
-            this.props.login({ Email: email, Password: password })
+            this.props.login({ email: email, password: password })
                 .then(
                     () => {
-                        this.setState({ done: true }); 
+                        this.setState({ done: false }); 
                         setAlert({ message: 'Вхід успішно виконано!', type: 'success' });
                      },
                     (err) => {
@@ -133,6 +133,7 @@ class SignInForm extends Component {
         const { nextStep_changePassword, code_confirm } = this.state;
         var resetPasswordContent = '';
         var resetPasswordCodeContent = '';
+       
         if (nextStep_changePassword) {
             resetPasswordCodeContent = (<div id='code_container' className='code-container'>
                  <label style={{marginTop:'5px'}}>Код підтвердження</label>

@@ -689,7 +689,7 @@ class NavMenu extends Component {
     const { menu_choice, mobile_menu_choice } = this.state;
     const { isAuthenticated, user } = this.props.auth;
     const { current_gender } = this.props;
-
+    console.log(this.props);
     var guestElem = (<div>
       <a href='/cart' id='cart'>
         <i className="fa fa-shopping-cart"></i>
@@ -721,7 +721,7 @@ class NavMenu extends Component {
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false">
-              {isAuthenticated ? user.name.toUpperCase() : ''}
+              {isAuthenticated ? user.email.toUpperCase() : ''}
           </button>
             <div className='dropdown-menu' id='drop-menu_user' aria-labelledby="dopbtn_user">
             <a href='/profile/orders?page=1'>
@@ -874,7 +874,7 @@ class NavMenu extends Component {
              
                  {isAuthenticated ? 
                   <a onClick={(e) => { this.change_mobile_menu_content(e, 'user') }}
-                  className="nav-link menu-link user-name" href='/profile'>{user.name.toUpperCase()}</a>
+                  className="nav-link menu-link user-name" href='/profile'>{user.email.toUpperCase()}</a>
                   :
                   <a className="nav-link" href="/account/signin" ><u>Особистий кабінет</u></a>}
               </li>

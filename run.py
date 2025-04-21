@@ -1,10 +1,10 @@
 from app import create_app
 from app.models import db, User
 from sqlalchemy_utils import database_exists, create_database
-from flask_migrate import Migrate, upgrade
+from werkzeug.security import generate_password_hash
 
 app = create_app()
-migrate = Migrate(app, db)
+
 if __name__ == '__main__':
     with app.app_context():
         db_uri = app.config['SQLALCHEMY_DATABASE_URI']
@@ -15,17 +15,19 @@ if __name__ == '__main__':
             create_database(db_uri)
             print("✅ Базу даних створено!")
 
-        upgrade()
+        
         print("📦 Таблиці створено успішно")
 
        
        # Додати користувача, якщо ще не існує
         if not User.query.filter_by(email='sergiy.kuzmich1999@gmail.com').first():
+            hashed_password = generate_password_hash('Qweasd246458!')
             user = User(
                 first_name='Admin', 
                 email='sergiy.kuzmich1999@gmail.com', 
-                password='Qweasd246458!', 
-                role='Admin'
+                password=hashed_password, 
+                role='Admin',
+                is_Confirmed=True
                 )
             db.session.add(user)
             db.session.commit()

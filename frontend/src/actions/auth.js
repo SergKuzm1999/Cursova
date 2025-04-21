@@ -27,13 +27,14 @@ export function login(data) {
   return dispatch => {
     return axios.post('Account/Login', data)
       .then(res => {
-        loginByJWT(res.data, dispatch);
+        loginByJWT(res.data.token, dispatch);
       });
   }
 }
 const loginByJWT = (token, dispatch) => {
     var user = jwt.decode(token);
     localStorage.setItem('jwtToken', token);
+    console.log("A" + token);
     setAuthorizationToken(token);
     dispatch(setCurrentUser(user));
 }

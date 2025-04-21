@@ -16,14 +16,14 @@ class SignUpPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: '',
-            lastName: '',
+            first_name: '',
+            last_name: '',
             email: '',
             password: '',
-            phoneNumber: '',
+            phone: '',
             region: '',
             city: '',
-            numberDelivery: '',
+            number_delivery: '',
             done: false,
             isLoading: false,
             private_policy: false,
@@ -33,7 +33,7 @@ class SignUpPage extends Component {
     }
     componentDidMount() {
         document.title = 'Зареєструватися - Clothes4U';
-        new Inputmask('(380)-99-999-99-99').mask(document.getElementById('phoneNumber'));
+        new Inputmask('(380)-99-999-99-99').mask(document.getElementById('phone'));
        
     }
     createOptions(name, data) {
@@ -64,7 +64,7 @@ class SignUpPage extends Component {
             this.getNumberDelivery(innerHTML);
         }
         if(parentNode.id === 'dropdown-item-number-delivery'){
-            this.setState({numberDelivery:innerHTML});
+            this.setState({number_delivery:innerHTML});
             document.getElementById('dropbtn_number_delivery').setAttribute('value',innerHTML);
         }
     }
@@ -79,12 +79,16 @@ class SignUpPage extends Component {
         }
        return axios.post(settings.url, settings.data).then(res => {this.createOptions('dropdown-item-region', res.data.data);});
     }
-    getCities(){
+    getCities(region){
         var settings = {
             "url": "https://api.novaposhta.ua/v2.0/json/",
             data: {
+                apiKey: API_KEY,
                 modelName: 'Address',
-                calledMethod: 'getCities'
+                calledMethod: 'getCities',
+                methodProperties: {
+                    AreaDescription: region
+                }
             }
         }
        return axios.post(settings.url, settings.data).then(res=>{this.createOptions('dropdown-item-city', res.data.data);});
@@ -130,20 +134,20 @@ class SignUpPage extends Component {
                 window.pageYOffset + document.getElementsByClassName('help-block')[0].getBoundingClientRect().top - 300}, 800);
         }
         let errors = {};
-        if (this.state.lastName === '') errors.lastName = "Прізвище повинно бути від 1 до 32 символів!";
-        if (this.state.firstName === '') errors.firstName = "Ім'я повинне бути від 1 до 32 символів!";
         if (this.state.password === '') errors.password = "Введіть пароль!";
+        if (this.state.last_name === '') errors.last_name = "Прізвище повинно бути від 1 до 32 символів!";
+        if (this.state.first_name === '') errors.first_name = "Ім'я повинне бути від 1 до 32 символів!";
         if (this.state.email === '') errors.email = "Некоректний адрес електронної пошти!";
-        if (this.state.phoneNumber === '' ) errors.phoneNumber = "Не коректний телефон!";
+        if (this.state.phone === '' ) errors.phone = "Не коректний телефон!";
         if (this.state.region === '') errors.region = "Виберіть область!";
         if (this.state.city === '') errors.city = "Виберіть місто!";
-        if (this.state.numberDelivery === '') errors.numberDelivery = "Введіть відділення Нової почти!";
+        if (this.state.number_delivery === '') errors.number_delivery = "Введіть відділення Нової почти!";
         if (!this.state.private_policy) errors.private_policy = 'Необхідно погодитися з умовами використання сайту!';
         const isValid = Object.keys(errors).length === 0;
         if (isValid && this.state.private_policy) {
-            const { lastName, firstName, surName, email, password, phoneNumber, region, city, numberDelivery } = this.state;
+            const { first_name, last_name, email, password, phone, region, city, number_delivery } = this.state;
             this.setState({ isLoading: true });
-            this.props.register({ email, password, phoneNumber, region, city, numberDelivery, firstName, lastName, surName })
+            this.props.register({ email, password, phone, region, city, number_delivery, first_name, last_name })
                 .then(
                     () => {
                         $('html').animate({scrollTop: 0},800, 'swing');
@@ -200,23 +204,23 @@ class SignUpPage extends Component {
                                 <p>
                                     Якщо Ви вже зареєстровані, перейдіть на сторінку авторизації.
                                 </p>
-                                <div className={classnames('form-group', { 'error': !!errors.lastName })}>
+                                <div className={classnames('form-group', { 'error': !!errors.last_name })}>
                                     <label>ПРІЗВИЩЕ</label>
                                     <input type="text" className="form-control"
-                                        id="lastName"
-                                        name="lastName"
-                                        value={this.state.lastName}
+                                        id="last_name"
+                                        name="last_name"
+                                        value={this.state.last_name}
                                         onChange={this.handleChange} />
-                                    {!!errors.lastName ? <span className="help-block">{errors.lastName}</span> : ''}
+                                    {!!errors.last_name ? <span className="help-block">{errors.last_name}</span> : ''}
                                 </div>
-                                <div className={classnames('form-group', { 'error': !!errors.firstName })}>
+                                <div className={classnames('form-group', { 'error': !!errors.first_name })}>
                                     <label>ІМ'Я</label>
                                     <input type="text" className="form-control"
-                                        id="firstName"
-                                        name="firstName"
-                                        value={this.state.firstName}
+                                        id="first_name"
+                                        name="first_name"
+                                        value={this.state.first_name}
                                         onChange={this.handleChange} />
-                                    {!!errors.firstName ? <span className="help-block">{errors.firstName}</span> : ''}
+                                    {!!errors.first_name ? <span className="help-block">{errors.first_name}</span> : ''}
                                 </div>
                                 <div className={classnames('form-group', { 'error': !!errors.email })}>
                                     <label >EMAIL</label>
@@ -239,14 +243,14 @@ class SignUpPage extends Component {
                                         onMouseLeave={()=>this.hide_password()} />
                                     {!!errors.password ? <span className="help-block">{errors.password}</span> : ''}
                                 </div>
-                                <div className={classnames('form-group', { 'error': !!errors.phoneNumber })}>
+                                <div className={classnames('form-group', { 'error': !!errors.phone })}>
                                     <label>ТЕЛЕФОН</label>
                                     <input type="tel" className="form-control"
-                                        id="phoneNumber"
-                                        name="phoneNumber"
-                                        value={this.state.phonenumber}
+                                        id="phone"
+                                        name="phone"
+                                        value={this.state.phone}
                                         onChange={this.handleChange}/>
-                                    {!!errors.phoneNumber ? <span className="help-block">{errors.phoneNumber}</span> : ''}
+                                    {!!errors.phone ? <span className="help-block">{errors.phone}</span> : ''}
                                 </div>
                                 <div className={classnames('dropdown', { 'error': !!errors.region })}>
                                     <button className='dropdown-toggle' type="button" id="dropbtn_region" name='region'
@@ -266,13 +270,13 @@ class SignUpPage extends Component {
                                     <div className="dropdown-menu" id='dropdown-item-city' aria-labelledby="dropbtn_city"></div>
                                     {!!errors.city ? <span className="help-block">{errors.city}</span> : ''}
                                 </div>
-                                <div className={classnames('dropdown', { 'error': !!errors.numberDelivery })}>
+                                <div className={classnames('dropdown', { 'error': !!errors.number_delivery })}>
                                     <button className='dropdown-toggle' type="button" id="dropbtn_number_delivery"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name='numberDelivery'>
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name='number_delivery'>
                                         Відділення нової пошти
                                     </button>
                                     <div className="dropdown-menu" id='dropdown-item-number-delivery' aria-labelledby="dropbtn_number_delivery"></div>
-                                    {!!errors.numberDelivery ? <span className="help-block">{errors.numberDelivery}</span> : ''}
+                                    {!!errors.number_delivery ? <span className="help-block">{errors.number_delivery}</span> : ''}
                                 </div>
                                 <div className='personal-policy'>
                                     <button type='button' id='personal_policy_btn' onClick={this.click_personal_policy} />

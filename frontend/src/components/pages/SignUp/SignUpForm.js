@@ -15,14 +15,14 @@ class SignUpForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: '',
-            lastName: '',
+            first_name: '',
+            last_name: '',
             email: '',
             password: '',
-            phoneNumber: '',
+            phone: '',
             region: '',
             city: '',
-            numberDelivery: '',
+            number_delivery: '',
             done: false,
             isLoading: false,
             errors: {
@@ -32,7 +32,7 @@ class SignUpForm extends Component {
     componentDidMount() {
         getRegions();
         getCities();
-        new Inputmask('(380)-99-999-99-99').mask(document.getElementById('phoneNumber'));
+        new Inputmask('(380)-99-999-99-99').mask(document.getElementById('phone'));
     }
 
     setStateByErrors = (name, value) => {
@@ -59,19 +59,19 @@ class SignUpForm extends Component {
         e.preventDefault();
         $('html').animate({scrollTop: 0},1000, 'swing');
         let errors = {};
-        if (this.state.lastName === '') errors.lastName = "Прізвище повинно бути від 1 до 32 символів!";
-        if (this.state.firstName === '') errors.firstName = "Ім'я повинне бути від 1 до 32 символів!";
+        if (this.state.last_name === '') errors.last_name = "Прізвище повинно бути від 1 до 32 символів!";
+        if (this.state.first_name === '') errors.first_name = "Ім'я повинне бути від 1 до 32 символів!";
         if (this.state.email === '') errors.email = "Некоректний адрес електронної пошти!";
-        if (this.state.phoneNumber === '' ) errors.phoneNumber = "Не коректний телефон!";
+        if (this.state.phone === '' ) errors.phone = "Не коректний телефон!";
         if (this.state.region === '') errors.region = "Виберіть область!";
         if (this.state.city === '') errors.city = "Виберіть місто!";
-        if (this.state.numberDelivery === '') errors.numberDelivery = "Введіть відділення Нової почти!";
+        if (this.state.number_delivery === '') errors.number_delivery = "Введіть відділення Нової почти!";
         console.log(this.state);
         const isValid = Object.keys(errors).length === 0;
         if (isValid) {
-            const { lastName, firstName, email, password, phoneNumber, region, city, numberDelivery } = this.state;
+            const { first_name, last_name, email, password, phone, region, city, number_delivery } = this.state;
             this.setState({ isLoading: true });
-            this.props.register({ email, password, phoneNumber, region, city, numberDelivery, firstName, lastName })
+            this.props.register({ email, password, phone, region, city, number_delivery, first_name, last_name })
                 .then(
                     () => {
                         setAlert({ message: 'Аккаунт успішно створено!', type: 'success' });
@@ -100,23 +100,23 @@ class SignUpForm extends Component {
                                 <p>
                                     Якщо Ви вже зареєстровані, перейдіть на сторінку авторизації.
                                 </p>
-                                <div className={classnames('form-group', { 'error': !!errors.lastName })}>
+                                <div className={classnames('form-group', { 'error': !!errors.last_name })}>
                                     <label>ПРІЗВИЩЕ</label>
                                     <input type="text" className="form-control"
-                                        id="lastName"
-                                        name="lastName"
-                                        value={this.state.lastName}
+                                        id="last_name"
+                                        name="last_name"
+                                        value={this.state.last_name}
                                         onChange={this.handleChange} />
-                                    {!!errors.lastName ? <span className="help-block">{errors.lastName}</span> : ''}
+                                    {!!errors.last_name ? <span className="help-block">{errors.last_name}</span> : ''}
                                 </div>
-                                <div className={classnames('form-group', { 'error': !!errors.firstName })}>
+                                <div className={classnames('form-group', { 'error': !!errors.first_name })}>
                                     <label>ІМ'Я</label>
                                     <input type="text" className="form-control"
-                                        id="firstName"
-                                        name="firstName"
-                                        value={this.state.firstName}
+                                        id="first_name"
+                                        name="first_name"
+                                        value={this.state.first_name}
                                         onChange={this.handleChange} />
-                                    {!!errors.firstName ? <span className="help-block">{errors.firstName}</span> : ''}
+                                    {!!errors.first_name ? <span className="help-block">{errors.first_name}</span> : ''}
                                 </div>
                                 <div className={classnames('form-group', { 'error': !!errors.email })}>
                                     <label >EMAIL</label>
@@ -138,14 +138,14 @@ class SignUpForm extends Component {
                                         onChange={this.handleChange} />
                                     {!!errors.password ? <span className="help-block">{errors.password}</span> : ''}
                                 </div>
-                                <div className={classnames('form-group', { 'error': !!errors.phoneNumber })}>
+                                <div className={classnames('form-group', { 'error': !!errors.phone })}>
                                     <label>ТЕЛЕФОН</label>
                                     <input type="tel" className="form-control"
-                                        id="phoneNumber"
-                                        name="phoneNumber"
-                                        value={this.state.phonenumber}
+                                        id="phone"
+                                        name="phone"
+                                        value={this.state.phone}
                                         onChange={this.handleChange}/>
-                                    {!!errors.phoneNumber ? <span className="help-block">{errors.phoneNumber}</span> : ''}
+                                    {!!errors.phone ? <span className="help-block">{errors.phone}</span> : ''}
                                 </div>
                                 <div className={classnames('form-group', { 'error': !!errors.region })}>
                                     <label>ОБЛАСТЬ</label>
@@ -167,14 +167,14 @@ class SignUpForm extends Component {
                                     </select>
                                     {!!errors.city ? <span className="help-block">{errors.city}</span> : ''}
                                 </div>
-                                <div className={classnames('form-group', { 'error': !!errors.numberDelivery })}>
+                                <div className={classnames('form-group', { 'error': !!errors.number_delivery })}>
                                     <label>ВІДДІЛЕННЯ НОВОЇ ПОШТИ</label>
                                     <input type="text" className="form-control"
-                                        id="numberDelivery"
-                                        name="numberDelivery"
-                                        value={this.state.numberDelivery}
+                                        id="number_delivery"
+                                        name="number_delivery"
+                                        value={this.state.number_delivery}
                                         onChange={this.handleChange} />
-                                    {!!errors.numberDelivery ? <span className="help-block">{errors.numberDelivery}</span> : ''}
+                                    {!!errors.number_delivery ? <span className="help-block">{errors.number_delivery}</span> : ''}
                                 </div>
                                 <button type="submit" className="btn btn-dark" >Зареєструватися</button>
                             </form>
