@@ -5,7 +5,6 @@ import random, string
 import jwt
 import datetime
 from flask import current_app
-from app.services.validators import validate_login_data
 
 users = Blueprint('users', __name__)  
 
@@ -63,10 +62,7 @@ def create_user():
 @users.route('/Account/Login', methods=['POST'])
 def login():
     data = request.get_json()
-    errors = validate_login_data(data)
-    if errors:
-        return jsonify(errors), 400
-    
+       
     user = User.query.filter_by(email=data['email']).first()
     if user and user.check_password(data['password']):
         token = generate_token(user)
