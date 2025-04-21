@@ -689,7 +689,6 @@ class NavMenu extends Component {
     const { menu_choice, mobile_menu_choice } = this.state;
     const { isAuthenticated, user } = this.props.auth;
     const { current_gender } = this.props;
-    console.log(this.props);
     var guestElem = (<div>
       <a href='/cart' id='cart'>
         <i className="fa fa-shopping-cart"></i>

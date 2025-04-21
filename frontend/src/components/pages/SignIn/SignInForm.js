@@ -49,9 +49,9 @@ class SignInForm extends Component {
             this.props.login({ email: email, password: password })
                 .then(
                     () => {
-                        this.setState({ done: false }); 
+                        this.setState({ done: true });
                         setAlert({ message: 'Вхід успішно виконано!', type: 'success' });
-                     },
+                    },
                     (err) => {
                         this.setState({ errors: err.response.data, isLoading: false });
                         setAlert({ message: err.response.data, type: 'danger' })
@@ -94,7 +94,7 @@ class SignInForm extends Component {
                 setAlert({ message: 'Поле не може бути пустим!', type: 'danger' });
             }
         }
-        if(this.state.nextStep_changePassword && !this.state.code_confirm) {
+        if (this.state.nextStep_changePassword && !this.state.code_confirm) {
             var code = document.getElementById('reset_pass_code').value;
             if (code !== '') {
                 axios.get('api/client/CheckCode_ForgotPassword?email=' + email + '&confirmCode=' + code).then(
@@ -108,7 +108,7 @@ class SignInForm extends Component {
                     });
             }
         }
-        if(this.state.code_confirm){
+        if (this.state.code_confirm) {
             const new_password = document.getElementById('new_pass').value;
             const confirm_new_password = document.getElementById('confirm_new_pass').value;
             if (new_password !== confirm_new_password) setAlert({ message: 'Паролі не збігаються!', type: 'danger' });
@@ -119,7 +119,7 @@ class SignInForm extends Component {
                         .then(
                             (response) => {
                                 this.setState({ nextStep_changePassword: false });
-                                this.setState({ code_confirm: false});
+                                this.setState({ code_confirm: false });
                                 setAlert({ message: response.data, type: 'success' });
                                 this.closeForgotWindow();
                             },
@@ -133,10 +133,9 @@ class SignInForm extends Component {
         const { nextStep_changePassword, code_confirm } = this.state;
         var resetPasswordContent = '';
         var resetPasswordCodeContent = '';
-       
         if (nextStep_changePassword) {
             resetPasswordCodeContent = (<div id='code_container' className='code-container'>
-                 <label style={{marginTop:'5px'}}>Код підтвердження</label>
+                <label style={{ marginTop: '5px' }}>Код підтвердження</label>
                 <input type='text' id='reset_pass_code' className='form-control' placeholder="Введіть ваш код" />
             </div>);
         }

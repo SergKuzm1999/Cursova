@@ -144,7 +144,7 @@ class SignUpPage extends Component {
         if (this.state.number_delivery === '') errors.number_delivery = "Введіть відділення Нової почти!";
         if (!this.state.private_policy) errors.private_policy = 'Необхідно погодитися з умовами використання сайту!';
         const isValid = Object.keys(errors).length === 0;
-        if (isValid && this.state.private_policy) {
+        if (isValid ) {
             const { first_name, last_name, email, password, phone, region, city, number_delivery } = this.state;
             this.setState({ isLoading: true });
             this.props.register({ email, password, phone, region, city, number_delivery, first_name, last_name })
@@ -155,10 +155,11 @@ class SignUpPage extends Component {
                         setAlert({ message: 'Аккаунт успішно створено!', type: 'success' });
                         setTimeout(()=>{
                             window.location.pathname = '/account/signin';
-                        },2500);
+                        },1500);
                     },
                     (err) => {
                         this.setState({ errors: err.response.data, isLoading: false });
+                         setAlert({ message: err.response.data, type: 'danger' })
                         if(Object.keys(this.state.errors).length === 33)
                             setAlert({message:err.response.data, type:'danger'});
                         if(err.response.data === 'Підтвердіть свій аккаунт!'){
@@ -189,6 +190,7 @@ class SignUpPage extends Component {
         document.getElementById('password').type = 'password';
     }
     render() {
+     
         const { errors } = this.state;
         var form = (
             <div className='container sign'>

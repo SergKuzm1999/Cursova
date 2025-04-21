@@ -40,7 +40,11 @@ const loginByJWT = (token, dispatch) => {
 }
 export function register(data) {
   return dispatch => {
-    return axios.post('Account/Register', data);
+    
+    return axios.post('Account/Register', data)
+    .then(res => {
+      console.log("DATA",res);
+    });
   }
 }
 
