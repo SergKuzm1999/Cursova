@@ -5,7 +5,13 @@ class ProductsSimilar(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
 
-    products = db.relationship('Product', secondary='product_similar_association', backref='product_similar', lazy=True)
+    products = db.relationship(
+        'Product',
+        secondary='product_similar_association',
+        back_populates='products_similar',
+        lazy=True,
+        overlaps="products_similar"
+    )
 
 # Асоціативна таблиця для зв'язку "багато до багатьох"
 class ProductSimilarAssociation(db.Model):

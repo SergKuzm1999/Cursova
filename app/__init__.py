@@ -21,6 +21,12 @@ def create_app():
     migrate.init_app(app, db)
     mail.init_app(app)
     CORS(app, supports_credentials=True)
+
     from app.api.user import users
-    app.register_blueprint(users)
+    from app.api.category import categories
+    from app.api.product import products
+    app.register_blueprint(users, url_prefix='/Account')
+    app.register_blueprint(categories, url_prefix='/Categories')
+    app.register_blueprint(products, url_prefix='/Products')
+
     return app

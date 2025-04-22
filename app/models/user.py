@@ -14,14 +14,14 @@ class User(UserMixin, db.Model):
     city = db.Column(db.String(100), nullable=True)
     number_delivery = db.Column(db.String(100), nullable=True)
     date = db.Column(db.DateTime, default=datetime.now, nullable=False)
-    code_forgot_password = db.Column(db.String(100), nullable=True)
+    code_forgot_password = db.Column(db.Integer, nullable=True)
     phone = db.Column(db.String(20), unique=True, nullable=True)
     role = db.Column(db.String(100), nullable=False)
     is_Confirmed = db.Column(db.Boolean, default=False, nullable=True)
     code_confirm_email = db.Column(db.Integer, nullable=True)
     orders = db.relationship('Order', backref='user', lazy=True)
 
-    is_active = db.Column(db.Boolean, default=True)
+    
 
     def check_password(self, password):
         return check_password_hash(self.password, password)

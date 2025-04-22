@@ -4,7 +4,6 @@ from werkzeug.security import generate_password_hash
 import random, string
 import jwt
 import datetime
-from flask import current_app
 
 users = Blueprint('users', __name__)  
 
@@ -24,7 +23,7 @@ def generate_token(user):
     users = User.query.all()
     return jsonify([{'id': user.id,  'email': user.email} for user in users])
 
-@users.route('/Account/Register', methods=['POST'])
+@users.route('/Register', methods=['POST'])
 def create_user():
     from flask_mail import Message
     from app import mail
@@ -59,7 +58,7 @@ def create_user():
     mail.send(msg)
     return jsonify({'message': 'Користувача створено успішно'}), 201
 
-@users.route('/Account/Login', methods=['POST'])
+@users.route('/Login', methods=['POST'])
 def login():
     data = request.get_json()
        
@@ -71,7 +70,7 @@ def login():
     errors = 'Не правильний пароль або емейл!'
     return jsonify(errors), 400
 
-@users.route('/Account/Logout', methods=['POST'])
+@users.route('/Logout', methods=['POST'])
 def logout():
     return jsonify({"message": "Logged out successfully!"}), 200
 
