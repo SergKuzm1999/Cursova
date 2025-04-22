@@ -65,7 +65,7 @@ export function getProductById(id) {
 }
 export function getProductsByParams(gender, category, brand, color, size, minprice, maxprice, name, sort, pagination) {
   return dispatch => {
-    return axios.get('api/products/ByParams?gender=' + gender + '&category=' + category + '&brand=' + brand
+    return axios.get('/Products/ByParams?gender=' + gender + '&category=' + category + '&brand=' + brand
       + '&color=' + color + '&size=' + size + '&minprice=' + minprice + '&maxprice=' + maxprice + '&name=' + name + '&sort=' + sort 
       +'&pagination=' + pagination)
       .then(res => {
