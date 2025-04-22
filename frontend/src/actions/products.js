@@ -41,7 +41,7 @@ export function getProducts() {
 }
 export function getNewsProducts(pagination, gender) {
   return dispatch => {
-    return axios.get('api/products/News/' + pagination + '?gender=' + gender)
+    return axios.get('/Products/News/' + pagination + '?gender=' + gender)
       .then(res => {
         dispatch(setProducts(res.data));
       })
@@ -49,7 +49,7 @@ export function getNewsProducts(pagination, gender) {
 }
 export function getDiscountsProducts(pagination, gender) {
   return dispatch => {
-    return axios.get('api/products/Discounts/' + pagination + '?gender=' + gender)
+    return axios.get('/Products/Discounts/' + pagination + '?gender=' + gender)
       .then(res => {
         dispatch(setProducts(res.data));
       })
@@ -57,7 +57,7 @@ export function getDiscountsProducts(pagination, gender) {
 }
 export function getProductById(id) {
   return dispatch => {
-    return axios.get('api/products/ById/' + id)
+    return axios.get('/Products/ById/' + id)
       .then(res => {
         dispatch(setProducts(res.data));
       })
@@ -75,7 +75,7 @@ export function getProductsByParams(gender, category, brand, color, size, minpri
 }
 export function newProduct(product) {
   return dispatch => {
-    return axios.post('api/products/Newproduct', product)
+    return axios.post('Products/News', product)
       .then(res => {
         dispatch(addProduct(res.data));
       })

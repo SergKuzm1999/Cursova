@@ -13,7 +13,7 @@ import { setAlert } from '../../../helpers/setAlert';
 import $ from 'jquery';
 import Carousel from 'react-elastic-carousel';
 import axios from 'axios';
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 
 class ProductPage extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ class ProductPage extends Component {
             category_by_subcategory: '',
             size_input_f_text: '',
             size_input_s_text: '',
-            simular_products : []
+            simular_products: []
         };
         this.breakPoints = [
             { width: 1, itemsToShow: 1, pagination: false },
@@ -43,7 +43,7 @@ class ProductPage extends Component {
         this.setState({ idProduct: id });
         this.props.getProductById(id)
             .then(
-                () => {},
+                () => { },
                 (err) => {
                     if (err.response.data === 'Не найдено продуктів')
                         window.location.pathname = '/notFound';
@@ -131,15 +131,15 @@ class ProductPage extends Component {
         e.preventDefault();
         const { cartProducts } = this.props;
         const product = this.props.products;
-        const id = product[0].id;
-        const { name, newPrice } = product[0];
+        const id = product.id;
+        const { name, new_price } = product;
         let price = 0;
-        if (newPrice === 0) price = product[0].price;
-        else price = newPrice;
-        const image = product[0].images[0].path;
+        if (new_price == 0) price = product.price;
+        else price = new_price;
+        const image = product.images.path;
         const { size, count, size_input_f_text, size_input_s_text } = this.state;
         const sizeInfo = size_input_f_text + ' | ' + size_input_s_text;
-        const hrefProduct = `/catalog/${product[0].gender}/${product[0].subcategory.name}/${product[0].brand.name}/p${product[0].id}`;
+        const hrefProduct = `/catalog/${product.gender}/${product.subcategory.name}/${product.brand}/p${product.id}`;
         if (!cartProducts.find(value => {
             if (value.id === id && value.size === size) {
                 return true;
@@ -162,46 +162,49 @@ class ProductPage extends Component {
     }
     render() {
         const products_dot_images = document.getElementsByClassName('dot-image');
-        if(products_dot_images.length > 0){
-            if(products_dot_images.length <= 4){
+        if (products_dot_images.length > 0) {
+            if (products_dot_images.length <= 4) {
                 document.getElementsByClassName('rec-arrow-down')[0].style.display = "none";
                 document.getElementsByClassName('rec-arrow-up')[0].style.display = "none";
             }
         }
-        
+
         const product = this.props.products;
-        
+
         const { currentSlide, category_by_subcategory, size, simular_products } = this.state;
         const { size_input_f_text, size_input_s_text } = this.state;
         let { recommended_products } = this.props;
         var sizes = "";
         if (typeof sizes === 'string') {
-            sizes = product.length > 0 ? product[0].sizes : '';
+            sizes = product ? product.sizes : '';
         }
 
-        var reviews = product.length > 0 ? product[0].reviews : '';
+        var reviews = product && product.reviews ? product.reviews : '';
         var rating = 0;
-        if (reviews.length > 0) reviews.map((value) => rating = rating + value.rating);
+        if (reviews && reviews.length > 0) reviews.map((value) => rating = rating + value.rating);
         rating = rating / reviews.length;
         var sale_procent, saleElement;
 
-        if (product.length > 0) {
-            sale_procent = 100 - (product[0].newPrice * 100 / product[0].price);
+        if (product) {
+            sale_procent = 100 - (product.new_price * 100 / product.price);
             sale_procent = sale_procent.toString().split('.');
-            saleElement = product[0].newPrice !== 0 ? <div className='sale-product'>-{sale_procent[0]}%</div> : '';
+            saleElement = product.new_price != 0 ? <div className='sale-product'>-{sale_procent[0]}%</div> : '';
         }
-        if (product.length > 0) {
-            var descriptionArr = product[0].description.split(';');
+        if (product && product.description && product.description.indexOf(';') > 0) {
+            var descriptionArr = product.description.split(';');
         }
-        if (product.length > 0) {
+        if (product && product.description && product.description.indexOf('.') > 0) {
+            var descriptionArr = product.description.split('.');
+        }
+        if (product) {
             var priceContent;
-            if (product[0].newPrice === 0) {
-                priceContent = <div><h2 className='price'>{product.length > 0 && product[0].price} грн</h2></div>;
+            if (product.new_price == 0) {
+                priceContent = <div><h2 className='price'>{product && product.price} грн</h2></div>;
             }
             else {
                 priceContent = (<div>
-                    <h2 className='price' style={{ color: 'red' }}>{product.length > 0 && product[0].newPrice} грн</h2>
-                    <h4 className='price'><strike>{product.length > 0 && product[0].price} грн</strike></h4>
+                    <h2 className='price' style={{ color: 'red' }}>{product && product.new_price} грн</h2>
+                    <h4 className='price'><strike>{product && product.price} грн</strike></h4>
                 </div>);
             }
         }
@@ -242,19 +245,18 @@ class ProductPage extends Component {
                 if (size_input_f_text === '' || size_input_s_text === '')
                     cart_btn_text = 'Вкажіть дані для визначення розміру';
             }
-            else{
+            else {
                 if (size_input_f_text === '')
                     cart_btn_text = 'Вкажіть дані для визначення розміру';
             }
         }
         if (size === '' && sizes != '') cart_btn_text = 'Виребіть розмір';
-        if (product.length > 0){
-            product[0].name = product[0].name.replace(product[0].brand.name,'');
-            document.title = product[0].name + ' - Clothes4U';
+        if (product) {
+            document.title = product.name + ' - Clothes4U';
         }
         let recommended_products_reserve = [];
-        if(recommended_products.length > 0){
-            for(let i = recommended_products.length-1; i>=0;i--){
+        if (recommended_products.length > 0) {
+            for (let i = recommended_products.length - 1; i >= 0; i--) {
                 recommended_products_reserve.push(recommended_products[i]);
             }
         }
@@ -262,22 +264,22 @@ class ProductPage extends Component {
         return (
             <div className='product-page container'>
                 <Helmet>
-                    <meta name="Description" content={`Купити ${product.length > 0 && product[0].name} по величезних знижках. Інтернет-магазин Clothes4U. Оплата після огляду. Доставка по Україні за 24 години.`} />
-                    <meta name="Description" content={`${product.length > 0 && product[0].name}`} />
+                    <meta name="Description" content={`Купити ${product && product.name} по величезних знижках. Інтернет-магазин Clothes4U. Оплата після огляду. Доставка по Україні за 24 години.`} />
+                    <meta name="Description" content={`${product && product.name}`} />
                 </Helmet>
                 <div className='row'>
                     <div className='col col-lg-6 col-md-6 col-sm-12 col-12'>
                         <div>
                             <CarouselProvider onClick={this.setCurrentSlide} hasMasterSpinner={true} isPlaying={false}
                                 interval={7500} naturalSlideWidth={70} naturalSlideHeight={95}
-                                totalSlides={product.length > 0 && product[0].images.length}>
+                                totalSlides={product && product.images && product.images.length}>
                                 {saleElement}
                                 <div>
                                     <i className='fa fa-search-plus' onClick={(e) => this.imageZoom('show', e)}></i>
                                 </div>
                                 <Slider>
-                                    {product.length > 0 && product[0].images.map((value, index, array) =>
-                                        <Slide key={index} index={index}><ImageWithZoom index={index} src={value.path} onClick={(e) => this.imageZoom('show', e)} /></Slide>)}
+                                    {product && product.images && product.images.map((value, index, array) =>
+                                        <Slide key={index} index={index}><ImageWithZoom index={index} src={value} onClick={(e) => this.imageZoom('show', e)} /></Slide>)}
                                 </Slider>
                                 <ButtonBack className='button-move back' />
                                 <ButtonNext className='button-move next' />
@@ -286,11 +288,11 @@ class ProductPage extends Component {
                                 <div className='dot-group-image' >
                                     <Carousel verticalMode={true} itemsToShow={4} itemToScroll={1}
                                         enableSwipe={false} enableMouseSwipe={false} focusOnSelect={true}>
-                                        {product.length > 0 && product[0].images.map((value, index, array) =>
+                                        {product && product.images &&  product.images.map((value, index, array) =>
                                             <div key={index}>
                                                 <Dot slide={index} className='dot-image'>
                                                     <Image
-                                                        src={value.path}>
+                                                        src={value}>
                                                     </Image>
                                                 </Dot>
                                                 {index === 0 && <img alt={value} src={value.path} style={{ visibility: 'hidden' }} className='move_to_cart' />}
@@ -303,10 +305,10 @@ class ProductPage extends Component {
                         <div id='modal'>
                             <div className='row'>
                                 <CarouselProvider hasMasterSpinner={true} currentSlide={currentSlide} naturalSlideWidth={70} naturalSlideHeight={93}
-                                    totalSlides={product.length > 0 && product[0].images.length}>
+                                    totalSlides={product && product.images && product.images.length}>
                                     <Slider>
-                                        {product.length > 0 && product[0].images.map((value, index, array) =>
-                                            <Slide key={index} index={index + 1}><ImageWithZoom src={value.path} /></Slide>)}
+                                        {product && product.images && product.images.map((value, index, array) =>
+                                            <Slide key={index} index={index + 1}><ImageWithZoom src={value} /></Slide>)}
                                     </Slider>
                                     <ButtonBack className='button-move back' />
                                     <ButtonNext className='button-move next' />
@@ -320,9 +322,9 @@ class ProductPage extends Component {
                             <form onSubmit={this.addProductToCart}>
                                 <div>
                                     <h1 className='title'>
-                                        {product.length > 0 && product[0].name} 
-                                        {product.length > 0 ? product[0].brand.name !== "Без бренду" && " / " : ''} 
-                                        {product.length > 0 ? product[0].brand.name !== "Без бренду" && product[0].brand.name : ''}
+                                        {product && product.name}
+                                        {product ? product.brand !== "Без бренду" && " / " : ''}
+                                        {product ? product.brand !== "Без бренду" && product.brand : ''}
                                     </h1>
                                 </div>
                                 {priceContent}
@@ -342,18 +344,18 @@ class ProductPage extends Component {
                                     </span>
                                 </div>
                                 <div className='color-products'>
-                                    {simular_products.length > 0 && simular_products[0].map((value)=>
+                                    {simular_products.length > 0 && simular_products[0].map((value) =>
                                         value.id != product_id_now &&
-                                            <a href={`${window.location.pathname.replace(product_id_now,value.id)}`} key={value.id}>
-                                                <img src={value.images[0].path} alt={value.id}/>
-                                            </a>
+                                        <a href={`${window.location.pathname.replace(product_id_now, value.id)}`} key={value.id}>
+                                            <img src={value.images[0].path} alt={value.id} />
+                                        </a>
                                     )}
                                 </div>
                                 <div className='size'>
-                                    {sizes != '' ?
+                                    {sizes && sizes != '' ?
                                         <span>Розмір:</span> : ''}
                                     <br />
-                                    {typeof sizes === 'object' &&
+                                    {sizes && typeof sizes == 'object' &&
                                         sizes.map((value, index) => <input type='radio'
                                             onClick={(e) => { this.setState({ size: e.target.value }) }}
                                             value={value} name='size' id={`size-${value}`} key={index} />)}
@@ -397,7 +399,7 @@ class ProductPage extends Component {
                                 </div>
                             </form>
                             <div className='description'>
-                                {product.length > 0 && descriptionArr.map((item, index) => {
+                                {product && descriptionArr && descriptionArr.map((item, index) => {
                                     return <p key={index}>{item}</p>
                                 })}
                             </div>

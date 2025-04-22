@@ -14,21 +14,28 @@ class Product extends Component {
         return Math.floor(diff / oneDay);
     }
     render() {
+        console.log(this.props)
         const { product } = this.props;
         const currentDayOfYear = this.getDayOfYear(new Date().getDate());
         //if date from server format == d/m/y
-        const dateOfProduct = product[0].date.split('.');
+        const dateOfProduct = product.date.split('.');
         const searchDayOfYear = this.getDayOfYear(dateOfProduct[0]);
+        let sale_procent = 0;
         const newElement = searchDayOfYear - currentDayOfYear >= 0 && searchDayOfYear - currentDayOfYear <= 7 ? <div className='new-product'>NEW</div> : '';
-        let sale_procent = 100 - (product[0].newPrice * 100 / product[0].price);
-        sale_procent = sale_procent.toString().split('.');
-        const saleElement = product[0].newPrice !== 0 ? <div className='sale-product'>-{sale_procent[0]}%</div> : '';
+        if(product.new_price != 0.00 ){
+            sale_procent = 100 - (product.new_price * 100 / product.price);
+            sale_procent = sale_procent.toString().split('.');
+        }
+        const saleElement = product.new_price != 0.00 ? <div className='sale-product'>-{sale_procent[0]}%</div> : '';
         let sizes = '';
-        Array.from(product[0].sizes).map((value, index) => {
-            sizes += value;
-            if (index < product[0].sizes.length - 1) sizes += ', ';
-            return sizes;
-        });
+        
+        if (product.sizes && Array.isArray(product.sizes)) {
+            sizes = product.sizes.map((value, index) => {
+                let sizeString = value;
+                if (index < product.sizes.length - 1) sizeString += ', ';
+                return sizeString;
+            }).join('');
+        }
         return (
             
             <div className='product'>
@@ -36,25 +43,25 @@ class Product extends Component {
                     <div className='image-box'>
                         {saleElement}
                         {newElement}
-                        <a href={`/catalog/${product[0].gender}/${product[0].subcategory.name}/${product[0].brand.name}/p${product[0].id}`}>
-                            {product[0].images.length > 0 && <img src={product[0].images[0].path}
+                        <a href={`/catalog/${product.gender}/${product.subcategory}/${product.brand}/p${product.id}`}>
+                            {product.images.length > 0 && <img src={product.images[0]}
                                 className='first-image'
                                 alt='product-img-first' />}
-                            {product[0].images.length > 1 && <img src={product[0].images[1].path}
+                            {product.images.length > 1 && <img src={product.images[1]}
                                 className='second-image'
                                 alt='product-img-second' />}
                         </a>
                     </div>
                     <div className='description'>
                         <div className='product-name'>
-                            <a href={`/catalog/${product[0].gender}/${product[0].subcategory.name}/${product[0].brand.name}/p${product[0].id}`}>
-                                {product[0].name}
+                            <a href={`/catalog/${product.gender}/${product.subcategory}/${product.brand}/p${product.id}`}>
+                                {product.name}
                             </a>
                         </div>
-                        {product[0].newPrice === 0 ? <div className='price'>{product[0].price} грн</div> :
+                        {product.new_price == 0 ? <div className='price'>{product.price} грн</div> :
                         <section>
-                        <div className='sale-price'>{product[0].newPrice} грн</div>
-                        <div className='old-price'>{product[0].price} грн</div>
+                        <div className='sale-price'>{product.new_price} грн</div>
+                        <div className='old-price'>{product.price} грн</div>
                         </section>
                     }
                         <div className='size'>

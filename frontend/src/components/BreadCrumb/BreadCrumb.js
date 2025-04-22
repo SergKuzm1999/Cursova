@@ -60,7 +60,8 @@ class BreadCrumb extends Component {
                 const pathName = window.location.pathname;
                 var breadcrumContent, headerText, breadcrumGender, header, productId;
                 var categoryName = this.input_category_now();
-                if (products.length > 0) categoryNow = products[0].subcategory;
+                console.log(this.props);
+                if (products) categoryNow = products.subcategory;
                 if (categoryName === '') header = document.getElementsByTagName('h1')[0];
                 else header = categoryName;
                 if (header !== '' && pathName !== '/cart' && header !== undefined) {

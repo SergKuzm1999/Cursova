@@ -10,8 +10,9 @@ export function setCategories(data) {
 
   export function getCategories() {
     return dispatch => {
-      return axios.get('api/categories/GetCategories')
+      return axios.get('Categories/GetCategories')
         .then(res => {
+          console.log("D",res.data);
           dispatch(setCategories(res.data));
         })
     }

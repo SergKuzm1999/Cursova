@@ -14,7 +14,7 @@ class News extends Component {
         };
     }
     componentDidMount() {
-        if(window.location.pathname !== '/'){
+        if (window.location.pathname !== '/') {
             document.title = 'Новинки - Clothes4U';
         }
         this.getNewsProducts(this.props.current_gender);
@@ -22,9 +22,9 @@ class News extends Component {
     }
     scrollPagination = () => {
         if (this.state.timeout) {
-           setTimeout(()=>{
+            setTimeout(() => {
                 this.setState({ timeout: false });
-            },500);
+            }, 500);
         }
         else {
             let elements = document.getElementsByClassName('product');
@@ -54,7 +54,7 @@ class News extends Component {
                     </Helmet>}
                 <h1>НОВИНКИ</h1>
                 <div className='row'>
-                    {products !== undefined && products.map((value, index) =>
+                {products !== undefined && Array.isArray(products.products) && products.products.map((value, index) =>
                         <div key={index} className='col col-6 col-sm-4 col-md-3'>
                             <Product product={value} />
                         </div>)}
@@ -66,7 +66,7 @@ class News extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        products: state.products.products.products,
+        products: state.products.products,
         productsCount: state.products.products.productsCount,
         current_gender: state.current_gender.current_gender
     };

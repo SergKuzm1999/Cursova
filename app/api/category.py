@@ -4,7 +4,7 @@ from app.models import db, Category, SubCategory
 
 categories = Blueprint('categories', __name__)  
 
-@categories.route('/', methods=['GET'])
+@categories.route('/GetCategories', methods=['GET'])
 def get_categories():
     # # Отримуємо категорії з їх підкатегоріями, групуючи за Id
     # categories = await db.session.execute(
@@ -18,7 +18,9 @@ def get_categories():
             'name': category.name,
             'ua_name': category.ua_name,
             'subcategories': [
-                {'id': subcategory.id, 'name': subcategory.name} 
+                {'id': subcategory.id, 
+                 'name': subcategory.name
+                } 
                 for subcategory in category.subcategories
             ]
         })

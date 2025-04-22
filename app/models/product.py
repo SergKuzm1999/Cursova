@@ -11,7 +11,7 @@ class Product(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.String(255), nullable=False)
     date = db.Column(db.Date, default=datetime.now)
-    new_price = db.Column(db.Numeric(10, 2), nullable=True)
+    new_price = db.Column(db.Numeric(10, 2), nullable=True, default=0)
     article = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Numeric(10, 2), nullable=False)
     
@@ -29,3 +29,18 @@ class Product(db.Model):
     brand = db.relationship('Brand', backref=db.backref('product', lazy=False))
     images = db.relationship('ProductImage', backref='product', lazy=False)
     reviews = db.relationship('Review', backref='product', lazy=True)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'price': self.price,
+            'new_price': self.new_price,
+            'article': self.article,
+            'sizes': self.sizes,  
+            'images': [image.to_dict() for image in self.images], 
+            'date': self.date,
+            'brand':self.brand.name,
+            'reviews':self.reviews
+        }

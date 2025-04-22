@@ -6,3 +6,9 @@ class ProductImage(db.Model):
     path = db.Column(db.String(255), nullable=False)
     
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'path': self.path,
+        }
