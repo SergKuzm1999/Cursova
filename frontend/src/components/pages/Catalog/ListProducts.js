@@ -473,21 +473,24 @@ class ListProducts extends Component {
     }
     input_category_now = () => {
         const category_name = new URLSearchParams(document.location.search).get('category');
-        const all_categories = this.props.categories;
+        const all_categories = this.props.categories.categories;
+       
         let return_value = '';
         if (category_name === null) return_value = 'Одяг, Аксесуари, Сумки, Взуття';
-        all_categories.forEach(e => {
-            if (e[0].name === category_name) {
-                return_value = e[0].uaName;
-            }
-            else {
-                e[0].subcategories.map(s => {
-                    if (s.name === category_name) {
-                        return_value = s.uaName;
-                    }
-                })
-            }
-        });
+        if (all_categories && all_categories.length > 0) {
+            all_categories.forEach(e => {
+                if (e.name === category_name) {
+                    return_value = e.ua_name;
+                }
+                else {
+                    e.subcategories.map(s => {
+                        if (s.name === category_name) {
+                            return_value = s.ua_name;
+                        }
+                    })
+                }
+            });
+        }
         return return_value;
     }
     category_click(e) {
