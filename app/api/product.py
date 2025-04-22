@@ -1,8 +1,5 @@
 from flask import Blueprint, request, jsonify, current_app
-from app.models import db, Product
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
-from sqlalchemy import func
+from app.models import db, Product, Review
 from datetime import datetime, timedelta
 
 products = Blueprint('products', __name__)  
@@ -152,7 +149,8 @@ def get_product_by_id(id):
                 'id': r.id,
                 'user_name': r.user_name,
                 'rating': r.rating,
-                'text': r.text
+                'text': r.text,
+                'date':r.date
             }
             for r in p.reviews
         ]
@@ -160,3 +158,23 @@ def get_product_by_id(id):
     if not products:
         return jsonify({'error': 'Немає нових продуктів'}), 400
     return jsonify(product_dicts[0]), 200
+
+@products.route('/NewReview', methods=['POST'])
+def set_review():
+    data = request.get_json()
+    new_review = Review(
+        user_name = data.get('user_name'),
+        text = data.get('text'),
+        rating = data.get('rating'),
+        product_id = data.get('product_id'),
+        user_id = data.get('user_id')
+    )
+    db.session.add(new_review)
+    db.session.commit()
+    return jsonify({'message': 'Відгук успішно добавлено!'}), 201
+
+@products.route('/GetReview', methods=['GET'])
+def get_reviews():
+    
+    return jsonify({'message': 'Відгук успішно добавлено!'}), 201
+

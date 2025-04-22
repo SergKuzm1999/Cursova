@@ -33,7 +33,7 @@ export function putProduct(product) {
 }
 export function getProducts() {
   return dispatch => {
-    return axios.get('api/products/All')
+    return axios.get('//All')
       .then(res => {
         dispatch(setProducts(res.data));
       })
@@ -99,7 +99,7 @@ export function editProduct(id, product) {
 }
 export function addProductReview(review) {
   return dispatch => {
-    return axios.post('api/products/Newreview', review)
+    return axios.post('/Products/NewReview', review)
       .then(res => {
         dispatch(addReview(res.data));
       })

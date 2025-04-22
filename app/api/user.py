@@ -74,3 +74,18 @@ def login():
 def logout():
     return jsonify({"message": "Logged out successfully!"}), 200
 
+@users.route('/GetUserInfoById/<int:id>', methods=['GET'])
+def getUser_ById(id):
+    user = User.query.filter_by(id=id).first()
+    if(user):
+       if user:
+        return jsonify({
+            'id': user.id,  
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email,
+            'phone': user.phone,
+            # додай інші потрібні поля
+        })
+       print("Користувача не знайдено")
+    return jsonify({"message": "Користувача не знайдено!"}), 400

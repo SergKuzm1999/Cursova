@@ -10,7 +10,7 @@ class Product(db.Model):
     color = db.Column(db.String(255), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.String(255), nullable=False)
-    date = db.Column(db.Date, default=datetime.now)
+    date = db.Column(db.DateTime, default=lambda: datetime.now().replace(microsecond=0), nullable=False)
     new_price = db.Column(db.Numeric(10, 2), nullable=True, default=0)
     article = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Numeric(10, 2), nullable=False)

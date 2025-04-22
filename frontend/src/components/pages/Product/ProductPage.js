@@ -430,7 +430,9 @@ class ProductPage extends Component {
                                                             <div className="fa fa-star" style={{ color: 'rgb(207, 207, 207)' }} />}
                                                     </div>
                                                     <div className='name'>
-                                                        {value.userName} {value.date}
+                                                        
+                                                        {value.user_name + ' '} 
+                                                        {new Date(value.date).toLocaleString()}
                                                     </div>
                                                     <div className='text'>
                                                         {value.text}

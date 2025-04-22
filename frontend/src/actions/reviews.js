@@ -8,7 +8,7 @@ export function setReviews(data) {
   }
   export function getReviews() {
     return dispatch => {
-      return axios.get('api/products/Getreviews/')
+      return axios.get('/Products/GetReviews/')
         .then(res => {
           dispatch(setReviews(res.data));
         })

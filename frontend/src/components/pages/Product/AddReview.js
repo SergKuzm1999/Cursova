@@ -22,7 +22,7 @@ class AddReview extends Component {
         const { user_id } = this.props;
         if (user_id !== undefined) {
             this.props.GetUserInfoById(user_id).then(
-                () => { this.setState({ userName: this.props.users.firstName + ' ' + this.props.users.lastName }) }
+                () => { this.setState({ userName: this.props.users.first_name + ' ' + this.props.users.last_name }) }
             );
         }
 
@@ -36,10 +36,11 @@ class AddReview extends Component {
             if (this.state.rating === 0) errors.rating = "Будь ласка, виберіть оцінку!"
             const isValid = Object.keys(errors).length === 0;
             if (isValid) {
-                const { userName, text, rating } = this.state;
-
-                const productId = this.props.idProduct;
-                this.props.addProductReview({ productId, userName, text, rating })
+                const { text, rating } = this.state;
+                const user_name = this.state.userName;
+                const product_id = this.props.idProduct;
+                const user_id = this.props.user_id;
+                this.props.addProductReview({ product_id, user_name, text, rating, user_id})
                     .then(
                         () => {
                             setAlert({ message: 'Відгук відправлено', type: 'success' });
@@ -132,6 +133,7 @@ class AddReview extends Component {
     }
     render() {
         const { errors } = this.state;
+
         return (
             <div id='add-review-form'>
                 <form onSubmit={(e) => this.AddReview(e)}>
