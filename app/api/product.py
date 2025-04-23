@@ -72,7 +72,7 @@ def get_products_news(pagination):
             'brand': p.brand.name,
             'price': p.price,
             'new_price': p.new_price,
-            'images': [img.path for img in p.images[:2]] if p.images else [],
+            'images': [img.path for img in sorted(p.images, key=lambda img: img.id)[:2]] if p.images else [],
             'date': p.date.strftime('%d.%m.%Y')
         })
 
@@ -118,7 +118,7 @@ def get_products_discounts(pagination):
             'brand': p.brand.name,
             'price': p.price,
             'new_price': p.new_price,
-            'images': [img.path for img in p.images[:2]] if p.images else [],
+            'images': [img.path for img in sorted(p.images, key=lambda img: img.id)[:2]] if p.images else [],
             'date': p.date.strftime('%d.%m.%Y')
         })
 
@@ -149,7 +149,7 @@ def get_product_by_id(id):
             'brand': p.brand.name,
             'price': p.price,
             'new_price': p.new_price,
-            'images': [img.path for img in p.images[:2]] if p.images else [],
+            'images': [img.path for img in p.images] if p.images else [],
             'date': p.date.strftime('%d.%m.%Y'),
             'reviews': [
             {
@@ -258,7 +258,7 @@ def get_products_by_params():
             'brand': p.brand.name,
             'price': p.price,
             'new_price': p.new_price,
-            'images': [img.path for img in p.images[:2]] if p.images else [],
+            'images': [img.path for img in sorted(p.images, key=lambda img: img.id)[:2]] if p.images else [],
             'date': p.date.strftime('%d.%m.%Y %H:%M:%S')
         })
 

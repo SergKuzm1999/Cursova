@@ -270,7 +270,7 @@ class ProductPage extends Component {
                     <div className='col col-lg-6 col-md-6 col-sm-12 col-12'>
                         <div>
                             <CarouselProvider onClick={this.setCurrentSlide} hasMasterSpinner={true} isPlaying={false}
-                                interval={7500} naturalSlideWidth={70} naturalSlideHeight={95}
+                                interval={7500} naturalSlideWidth={120} naturalSlideHeight={120}
                                 totalSlides={product && product.images && product.images.length}>
                                 {saleElement}
                                 <div>
@@ -303,7 +303,7 @@ class ProductPage extends Component {
                         </div>
                         <div id='modal'>
                             <div className='row'>
-                                <CarouselProvider hasMasterSpinner={true} currentSlide={currentSlide} naturalSlideWidth={70} naturalSlideHeight={93}
+                                <CarouselProvider hasMasterSpinner={true} currentSlide={currentSlide} naturalSlideWidth={70} naturalSlideHeight={70}
                                     totalSlides={product && product.images && product.images.length}>
                                     <Slider>
                                         {product && product.images && product.images.map((value, index, array) =>
