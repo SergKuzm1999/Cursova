@@ -10,7 +10,7 @@ export function addOrder(data) {
 
   export function newOrder(order) {
     return dispatch => {
-      return axios.post('api/orders/NewOrder', order)
+      return axios.post('/Orders/NewOrder', order)
         .then(res => {
           dispatch(addOrder(res.data));
         })

@@ -50,7 +50,7 @@ export function getUserOrders(userId, pagination) {
 
 export function newOrder(orders) {
     return dispatch => {
-        return axios.post('api/orders/NewOrder', orders)
+        return axios.post('/Orders/NewOrder', orders)
             .then(res => {
                 dispatch(addOrder(res.data));
             })

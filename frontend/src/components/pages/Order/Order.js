@@ -35,8 +35,9 @@ class Order extends Component {
   successOrder = () => {
     const { cartProducts } = this.props;
     const userId = this.props.auth.id;
-   
-    this.props.newOrder({ cartProducts, userId }).then(
+    const full_price = this.getFullPriceOrder(cartProducts);
+    console.log(cartProducts);
+    this.props.newOrder({ cartProducts, userId,  full_price}).then(
       () => {
         const timeout_id = setTimeout(() => {
           window.location.href = '/profile/orders?page=1';

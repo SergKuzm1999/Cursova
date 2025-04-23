@@ -162,6 +162,7 @@ class ProductPage extends Component {
         if (e.target.id === 'size_input_s') this.setState({ size_input_s_text: e.target.value });
     }
     render() {
+        
         const products_dot_images = document.getElementsByClassName('dot-image');
         if (products_dot_images.length > 0) {
             if (products_dot_images.length <= 4) {
@@ -251,7 +252,7 @@ class ProductPage extends Component {
                     cart_btn_text = 'Вкажіть дані для визначення розміру';
             }
         }
-        if (sizes) cart_btn_text = 'Виберіть розмір';
+        if (sizes && size === '') cart_btn_text = 'Виберіть розмір';
         if (product) {
             document.title = product.name + ' - Clothes4U';
         }
