@@ -11,4 +11,4 @@ class Order(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    orders_products = db.relationship('OrderProduct', backref='order', lazy=True)
+    orders_products = db.relationship('OrderProduct', backref='order', lazy='joined')

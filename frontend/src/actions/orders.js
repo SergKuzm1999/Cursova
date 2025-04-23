@@ -30,7 +30,7 @@ export function getOrders() {
 
 export function GetOrdersUserCount(userid) {
     return dispatch => {
-        return axios.get('api/orders/GetOrdersUserCount/' + userid)
+        return axios.get('/Orders/GetOrdersUserCount/' + userid)
             .then(res => {
                 countOrders = res.data;
                 dispatch(setOrders(listOrders, res.data));
@@ -40,7 +40,7 @@ export function GetOrdersUserCount(userid) {
 
 export function getUserOrders(userId, pagination) {
     return dispatch => {
-        return axios.get('api/orders/GetUserOrders/' + userId + '/' + pagination)
+        return axios.get('/Orders/GetUserOrders/' + userId + '/' + pagination)
             .then(res => {
                 listOrders = res.data;
                 dispatch(setOrders(res.data, countOrders));

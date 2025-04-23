@@ -55,9 +55,6 @@ class ProductPage extends Component {
                 (err) => { console.log("Error get data ", err); }
             );
 
-        axios.get('api/categories/GetSubcategory_Category/' + this.props.match.params.category).then(
-            res => { this.setState({ category_by_subcategory: res.data }); }
-        );
         axios.get('/api/products/GetProducts_Similars/' + id).then(
             res => { this.setState({ simular_products: res.data }); }
         );
