@@ -519,10 +519,11 @@ class ListProducts extends Component {
     get_filter_sizes() {
         let filter_sizes = [];
         if (this.props.filter_sizes !== undefined) {
+            console.log(this.props.filter_sizes)
             this.props.filter_sizes.map((value) => {
-                value.map((size) => {
-                    filter_sizes.push(size);
-                });
+                
+                    filter_sizes.push(value);
+                
             })
             filter_sizes = Array.from(new Set(filter_sizes));
             if (filter_sizes.indexOf('XS') > 0) {
@@ -1174,6 +1175,7 @@ class ListProducts extends Component {
     }
 }
 const mapStateToProps = (state) => {
+    console.log("STTTT",state);
     return {
         products: state.products.products.products,
         productsCount: state.products.products.productsCount,

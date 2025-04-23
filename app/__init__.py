@@ -25,8 +25,11 @@ def create_app():
     from app.api.user import users
     from app.api.category import categories
     from app.api.product import products
+    from app.api.brand import brands
+
     app.register_blueprint(users, url_prefix='/Account')
     app.register_blueprint(categories, url_prefix='/Categories')
     app.register_blueprint(products, url_prefix='/Products')
+    app.register_blueprint(brands, url_prefix='/Brands')
 
     return app

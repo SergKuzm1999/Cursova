@@ -14,7 +14,6 @@ class Reviews extends Component {
     }
     render() {
         let { reviews } = this.props;
-        console.log("REVIEWSSSSS", this.props);
         return (
             <div className='container reviews-page'>
                 <h1>Відгуки</h1>

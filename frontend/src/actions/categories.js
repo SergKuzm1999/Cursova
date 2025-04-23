@@ -12,7 +12,6 @@ export function setCategories(data) {
     return dispatch => {
       return axios.get('Categories/GetCategories')
         .then(res => {
-          console.log("D",res.data);
           dispatch(setCategories(res.data));
         })
     }

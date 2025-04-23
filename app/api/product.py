@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify, current_app
 from app.models import db, Product, Review, SubCategory, Category
 from datetime import datetime, timedelta
 from sqlalchemy import func
+from itertools import chain
 
 products = Blueprint('products', __name__)  
 product_data = [
@@ -262,9 +263,16 @@ def get_products_by_params():
     
     product_dicts = product_dicts[:8 * pagination]
 
+    filter_brands = list({p.brand.name for p in filtered_products})
+    filter_colors = list({p.color for p in filtered_products})    
+    filter_sizes = sorted(list(set(chain.from_iterable(p.sizes for p in filtered_products if p.sizes))))
+
     return jsonify({
         'products': product_dicts,
-        'productsCount': len(filtered_products)
+        'productsCount': len(filtered_products),
+        'filter_brands':filter_brands,
+        'filter_colors': filter_colors,
+        'filter_sizes':filter_sizes
     }), 200
 
 @products.route('/NewReview', methods=['POST'])
@@ -298,7 +306,6 @@ def get_count():
             count += Product.query.join(SubCategory).join(Category).filter(Product.gender == 'all').filter(func.lower(Category.ua_name) == func.lower(subcategory)).count()
             count += Product.query.join(SubCategory).join(Category).filter(Product.gender == gender).filter(func.lower(Category.ua_name) == func.lower(subcategory)).count()
     if isCategory == 'false':
-        print('a')
         if subcategory:
             count = 0
             count += Product.query.join(SubCategory).filter(Product.gender == 'all').filter(func.lower(SubCategory.ua_name) == func.lower(subcategory)).count()
