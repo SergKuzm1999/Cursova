@@ -67,5 +67,5 @@ def get_user_orders(user_id,pagination):
 @orders.route('/GetOrdersUserCount/<int:user_id>', methods=['GET'])
 def get_orders_user_count(user_id):
     count = Order.query.filter_by(user_id=user_id).count()
-
     return jsonify({'countOrders': count}), 200
+

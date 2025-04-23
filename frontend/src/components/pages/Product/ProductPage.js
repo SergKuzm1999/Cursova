@@ -55,9 +55,9 @@ class ProductPage extends Component {
                 (err) => { console.log("Error get data ", err); }
             );
 
-        axios.get('/api/products/GetProducts_Similars/' + id).then(
-            res => { this.setState({ simular_products: res.data }); }
-        );
+        // axios.get('/api/products/GetProducts_Similars/' + id).then(
+        //     res => { this.setState({ simular_products: res.data }); }
+        // );
     }
     imageZoom(type, e) {
         const modal = document.getElementById('modal');

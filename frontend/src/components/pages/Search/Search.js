@@ -58,6 +58,7 @@ class Search extends Component {
     }
     render() {
         const { products, count_products } = this.props;
+        console.log(this.state);
         return (
             <div className='search-page'>
                 <Helmet>

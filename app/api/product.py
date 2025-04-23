@@ -207,9 +207,11 @@ def get_products_by_params():
             if product.sizes and size in product.sizes
         ]
     if name:
+        name_parts = name.lower().split()
         filtered_products = [
             product for product in filtered_products
-            if (product.name == name)
+            if all(part in product.name.lower() for part in name_parts) or 
+           (product.brand and all(part in product.brand.name.lower() for part in name_parts))
         ]   
     if min_price:
         filtered_products = [
