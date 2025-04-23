@@ -289,9 +289,36 @@ def set_review():
     db.session.commit()
     return jsonify({'message': 'Відгук успішно добавлено!'}), 201
 
-@products.route('/GetReview', methods=['GET'])
+@products.route('/GetReviews', methods=['GET'])
 def get_reviews():
-    return jsonify({'message': 'Відгук успішно добавлено!'}), 201
+    reviews = Review.query.all()
+
+    reviews_list = []
+
+    for review in reviews:
+        product = review.product
+        product_data = {
+            'id': product.id,
+            'name': product.name,
+            'gender': product.gender,
+            'subcategory': product.subcategory.name,
+            'brand': product.brand.name,
+            'images': [img.path for img in product.images] 
+        }
+
+        reviews_list.append({
+            'id': review.id,
+            'user_name': review.user_name,
+            'text': review.text,
+            'rating': review.rating,
+            'date': review.date.strftime('%d.%m.%Y %H:%M:%S'),
+            'product': product_data
+        })
+
+    if reviews_list:
+        return jsonify(reviews=reviews_list), 200
+    else:
+        return jsonify({"message": "Брендів не знайдено"}), 404
 
 @products.route('/GetCountProduct_Category/', methods=['GET'])
 def get_count():
