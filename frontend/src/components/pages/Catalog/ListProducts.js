@@ -127,233 +127,233 @@ class ListProducts extends Component {
     get_product_count() {
         const { current_gender } = this.props;
         if (current_gender === 'man') {
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=костюми&isCategory=true&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=костюми&isCategory=true&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_costumes: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=кофти, гольфи&isCategory=true&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=кофти, гольфи&isCategory=true&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_sweater: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=класичні штани&isCategory=true&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=класичні штани&isCategory=true&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_classic_trousers: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=одяг&isCategory=true&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=одяг&isCategory=true&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_clothes: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=взуття&isCategory=true&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=взуття&isCategory=true&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_shoes: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=кросівки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=кросівки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_sneakers: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=кеди&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=кеди&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_kedi: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=тапочки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=тапочки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_slippers: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=футболки, поло&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=футболки, поло&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_t_shirts: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=верхній одяг&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=верхній одяг&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_outerwear: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=світшоти&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=світшоти&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_sweatshirts: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=спортивні костюми&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=спортивні костюми&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_sport_costumes: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=худі&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=худі&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_hoodie: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=сорочки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=сорочки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_shirts: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=спортивні штани&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=спортивні штани&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_sport_trousers: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=джинси&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=джинси&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_jeens: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=карго, джогери, чиноси&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=карго, джогери, чиноси&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_jogger: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=шорти&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=шорти&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_shorts: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=джинсові шорти&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=джинсові шорти&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_jeens_shorts: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=комплекти&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=комплекти&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_kits: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=рюкзаки, сумки&isCategory=true&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=рюкзаки, сумки&isCategory=true&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_bags_backpacks: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=спортивні сумки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=спортивні сумки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_sport_bags: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=рюкзаки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=рюкзаки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_backpacks: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=сумки через плече&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=сумки через плече&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_bags_on_the_shoulder: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=сумки на пояс&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=сумки на пояс&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_bananki: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=аксесуари&isCategory=true&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=аксесуари&isCategory=true&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_accessories: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=шкарпетки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=шкарпетки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_socks: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=Ремені&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=Ремені&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_belts: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=гаманці&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=гаманці&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_wallets: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=кепки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=кепки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_baseball_caps: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=Годинники&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=Годинники&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_watch: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=Нижня білізна&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=Нижня білізна&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_underwear: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=Жилетки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=Жилетки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_vests: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=Панами&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=Панами&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_panama: res.data });
                 });
         }
         if (current_gender === 'woman') {
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=одяг&isCategory=true&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=одяг&isCategory=true&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_clothes: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=взуття&isCategory=true&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=взуття&isCategory=true&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_shoes: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=кросівки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=кросівки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_sneakers: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=кеди&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=кеди&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_kedi: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=тапочки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=тапочки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_slippers: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=худі&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=худі&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_hoodie: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=сорочки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=сорочки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_shirts: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=штани&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=штани&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_trousers: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=Кофти, Светри&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=Кофти, Светри&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_sweaters: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=Костюми&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=Костюми&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_costumes: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=Сукні&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=Сукні&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_dresses: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=Нижня Білизна&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=Нижня Білизна&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_underwear: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=рюкзаки, сумки&isCategory=true&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=рюкзаки, сумки&isCategory=true&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_bags_backpacks: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=сумки жіночі&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=сумки жіночі&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_womens_bags: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=спортивні сумки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=спортивні сумки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_sport_bags: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=рюкзаки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=рюкзаки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_backpacks: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=сумки через плече&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=сумки через плече&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_bags_on_the_shoulder: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=сумки на пояс&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=сумки на пояс&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_bananki: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=аксесуари&isCategory=true&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=аксесуари&isCategory=true&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_accessories: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=шкарпетки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=шкарпетки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_socks: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=Ремені&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=Ремені&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_belts: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=кепки&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=кепки&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_baseball_caps: res.data });
                 });
-            axios.get('/api/products/Get_Count_Product_Categories?subcategory=Годинники&isCategory=false&gender=' + current_gender)
+            axios.get('/Products/GetCountProduct_Category?subcategory=Годинники&isCategory=false&gender=' + current_gender)
                 .then(res => {
                     this.setState({ count_watch: res.data });
                 });

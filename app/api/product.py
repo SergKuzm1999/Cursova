@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app
 from app.models import db, Product, Review, SubCategory, Category
 from datetime import datetime, timedelta
-from sqlalchemy import or_
+from sqlalchemy import func
 
 products = Blueprint('products', __name__)  
 product_data = [
@@ -283,6 +283,26 @@ def set_review():
 
 @products.route('/GetReview', methods=['GET'])
 def get_reviews():
-    
     return jsonify({'message': 'Відгук успішно добавлено!'}), 201
+
+@products.route('/GetCountProduct_Category/', methods=['GET'])
+def get_count():
+    count = 0
+    isCategory = request.args.get('isCategory')
+    subcategory = request.args.get('subcategory')
+    gender = request.args.get('gender')
+   
+    if isCategory == 'true':
+        if subcategory:
+            count = 0
+            count += Product.query.join(SubCategory).join(Category).filter(Product.gender == 'all').filter(func.lower(Category.ua_name) == func.lower(subcategory)).count()
+            count += Product.query.join(SubCategory).join(Category).filter(Product.gender == gender).filter(func.lower(Category.ua_name) == func.lower(subcategory)).count()
+    if isCategory == 'false':
+        print('a')
+        if subcategory:
+            count = 0
+            count += Product.query.join(SubCategory).filter(Product.gender == 'all').filter(func.lower(SubCategory.ua_name) == func.lower(subcategory)).count()
+            count += Product.query.join(SubCategory).filter(Product.gender == gender).filter(func.lower(SubCategory.ua_name) == func.lower(subcategory)).count()
+    
+    return jsonify(count)
 
