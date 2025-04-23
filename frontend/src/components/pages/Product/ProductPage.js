@@ -132,14 +132,15 @@ class ProductPage extends Component {
         const { cartProducts } = this.props;
         const product = this.props.products;
         const id = product.id;
+        console.log("CART",product);
         const { name, new_price } = product;
         let price = 0;
         if (new_price == 0) price = product.price;
         else price = new_price;
-        const image = product.images.path;
+        const image = product.images[0];
         const { size, count, size_input_f_text, size_input_s_text } = this.state;
         const sizeInfo = size_input_f_text + ' | ' + size_input_s_text;
-        const hrefProduct = `/catalog/${product.gender}/${product.subcategory.name}/${product.brand}/p${product.id}`;
+        const hrefProduct = `/catalog/${product.gender}/${product.subcategory}/${product.brand}/p${product.id}`;
         if (!cartProducts.find(value => {
             if (value.id === id && value.size === size) {
                 return true;
@@ -250,7 +251,7 @@ class ProductPage extends Component {
                     cart_btn_text = 'Вкажіть дані для визначення розміру';
             }
         }
-        if (size === '' && sizes != '') cart_btn_text = 'Виребіть розмір';
+        if (sizes) cart_btn_text = 'Виберіть розмір';
         if (product) {
             document.title = product.name + ' - Clothes4U';
         }
