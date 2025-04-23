@@ -62,6 +62,7 @@ class Order extends Component {
   render() {
     const { cartProducts } = this.props;
     const user = this.props.users;
+    console.log("USER",user);
     return (
       <div className='container order'>
         <div className='row'>
@@ -79,7 +80,7 @@ class Order extends Component {
                 <span>ПІБ</span>
               </div>
               <div className='col col-lg-6 col-sm-6'>
-                <span>{user.lastName}  {user.firstName} {user.surName}</span>
+                <span>{user.last_name}  {user.first_name}</span>
               </div>
             </div>
             <div className='row'>
@@ -95,7 +96,7 @@ class Order extends Component {
                 <span>Моб. телефон</span>
               </div>
               <div className='col'>
-                <span>{user.phoneNumber}</span>
+                <span>{user.phone}</span>
               </div>
             </div>
             <div className='row header'>
@@ -122,7 +123,7 @@ class Order extends Component {
                 <span>Відділення нової пошти</span>
               </div>
               <div className='col'>
-                <span>{user.numberDelivery}</span>
+                <span>{user.number_delivery}</span>
               </div>
             </div>
           </div>

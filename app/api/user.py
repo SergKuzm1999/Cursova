@@ -85,7 +85,9 @@ def getUser_ById(id):
             'last_name': user.last_name,
             'email': user.email,
             'phone': user.phone,
-            # додай інші потрібні поля
+            'region': user.region,
+            'city': user.city,
+            'number_delivery': user.number_delivery
         })
        print("Користувача не знайдено")
     return jsonify({"message": "Користувача не знайдено!"}), 400
