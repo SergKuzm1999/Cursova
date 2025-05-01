@@ -12,8 +12,9 @@ class AdminPage extends Component {
     }
     componentDidMount(){
         const { user } = this.props.auth;
+        console.log(user);
         if(user!=null){
-            if(user.roles !== 'Admin'){
+            if(user.role !== 'Admin'){
                 window.location = '/notfound';
             }
         }

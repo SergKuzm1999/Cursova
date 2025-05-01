@@ -14,7 +14,8 @@ def generate_token(user):
     payload = {
         "id": user.id,
         "email": user.email,
-        "exp": datetime.datetime.now() + datetime.timedelta(days=1)
+        "exp": datetime.datetime.now() + datetime.timedelta(days=1),
+        "role": user.role
     }
     token = jwt.encode(payload, current_app.config["SECRET_KEY"], algorithm="HS256")
     return token
@@ -91,3 +92,27 @@ def getUser_ById(id):
         })
        print("Користувача не знайдено")
     return jsonify({"message": "Користувача не знайдено!"}), 400
+
+@users.route('/GetUsers', methods=['GET'])
+def get_Users():
+    users = User.query.all()
+    
+    if(users):
+        users_dists = [
+            {
+                'id': p.id,
+                'first_name': p.first_name,
+                'last_name': p.last_name,
+                'role': p.role,
+                'email': p.email,
+                'date': p.date,
+                'is_Confirmed': p.is_Confirmed,
+                'code_confirm_email': p.code_confirm_email
+          }
+           for p in users
+        ]
+      
+          
+    if(users_dists):
+        return jsonify(users_dists), 200
+    return jsonify({"Message":"Користувачів не знайдено!"}), 400

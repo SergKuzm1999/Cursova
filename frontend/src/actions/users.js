@@ -11,7 +11,7 @@ export function setUsers(users) {
 
 export function getUsers() {
   return dispatch => {
-      return axios.get('api/admin/GetUsers/')
+      return axios.get('/Account/GetUsers')
       .then(res => {
         dispatch(setUsers(res.data));
       });
