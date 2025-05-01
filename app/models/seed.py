@@ -87,442 +87,265 @@ def sead_db():
 
     products = [
         Product(
-            name="Вітровка Nike M NK RPL MILER JKT",
+            name="Вітровка Nike M NK TCH WVN WR FZ JKT",
             description="Вітрівка Nike M Nk Rpl Miler Jkt відтворює класичний дизайн Windrunner та стане чудовим вибором для Ваших пробіжок. Виготовлена з якісного матеріалу, який має водовідштовхувальне покриття, що дозволить Вам займатись бігом у вологу погоду.",
-            price=4570,
+            price=6970,
             gender='man',
-            color='black',
+            color='green',
             quantity=12,
             article='p1',
             sizes=["S", "M", "L", "XL"],
             subcategory_id=SubCategory.query.filter_by(name='outerwear').first().id,
             brand_id=Brand.query.filter_by(name="Nike").first().id,
         ),
-         Product(
-            name="Вітровка Nike M NK TCH WVN WR FZ JKT",
-            description="Колекція Windrunner стала справжньою легендою ще в 1978 році, коли Nike вперше представила бігові куртки, які поєднували стиль і функціональність.",
-            price=6970,
-            new_price=5999,
-            gender='man',
-            color='green',
-            quantity=12,
-            article='p2',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='outerwear').first().id,
-            brand_id=Brand.query.filter_by(name="Nike").first().id,
-        ),
-        Product(
-            name="Вітровка Nike M NK WVN LND WR HD JKT",
-            description="Колекція Windrunner стала обличчям одягу Nike у 1978 році. Товари колекції спочатку створювались як бігові куртки, які з часом перетворилися на повсякденний одяг.",
-            price=5200,
-            new_price=4599,
-            gender='man',
-            color='black',
-            quantity=12,
-            article='p3',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='outerwear').first().id,
-            brand_id=Brand.query.filter_by(name="Nike").first().id,
-        ),
-         Product(
-            name="Футболка Nike M NSW TEE M90 NK AIR SP25 2 172086",
-            description="Склад:100% бавовна.Колір:Чорний.Сезон:Весна-Літо 2025, Літо.",
-            price=2200,
-            gender='man',
-            color='black',
-            quantity=14,
-            article='p4',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
-            brand_id=Brand.query.filter_by(name="Nike").first().id,
-        ),
-        Product(
-            name="Футболка New Balance Sport Essentials Gradient Logo T-Shirt",
-            description="Склад:100% бавовна.Колір:Чорний.Сезон:Весна-Літо 2025, Літо.",
-            price=1209,
-            gender='man',
-            color='black',
-            quantity=5,
-            article='p5',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
-            brand_id=Brand.query.filter_by(name="NewBalance").first().id,
-        ),
-        Product(
-            name="Футболка Puma GRAPHICS Moto Relaxed Tee",
-            description="Склад:100% бавовна.Колір:Чорний.Сезон:Весна-Літо 2025, Літо.",
-            price=1209,
-            gender='man',
-            color='white',
-            quantity=5,
-            article='p6',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
-            brand_id=Brand.query.filter_by(name="Puma").first().id,
-        ),
-         Product(
-            name="Футболка Adidas Originals JUVE ICON JSY",
-            description="У 2015 році Adidas став титульним спонсором Ювентуса — клубу, який впродовж десятиліть писав історію світового футболу.",
-            price=3700,
-            new_price=2999,
-            gender='all',
-            color='blue',
-            quantity=5,
-            article='p7',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
-            brand_id=Brand.query.filter_by(name="Adidas").first().id,
-        ),
-         Product(
-            name="Футболка Nike W NSW NK CHLL KNT MD CRP",
-            description="Футболка Nike W Nsw Nk Chll Knt Md Crp – це справжній маст-хев для створення легких і стильних літніх образів.",
-            price=1250,
-            gender='woman',
-            color='white',
-            quantity=5,
-            article='p8',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
-            brand_id=Brand.query.filter_by(name="Nike").first().id,
-        ),
-         Product(
-            name="Футболка Adidas Originals 3 S BABY TEE ",
-            description="Колекція Adidas Originals створена для тих, хто не боїться виділятися, хто впевнено крокує вулицями мегаполіса та цінує бездоганний стиль у кожній деталі.",
-            price=1250,
-            gender='woman',
-            color='black',
-            quantity=5,
-            article='p9',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
-            brand_id=Brand.query.filter_by(name="Adidas").first().id,
-        ),
-         Product(
-            name="Вітровка Puma DARE TO Oversized Zip-Off Woven Jacket",
-            description="Колекція Adidas Originals створена для тих, хто не боїться виділятися, хто впевнено крокує вулицями мегаполіса та цінує бездоганний стиль у кожній деталі.",
-            price=3999,
-            new_price=2999,
-            gender='woman',
-            color='white',
-            quantity=5,
-            article='p10',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='outerwear').first().id,
-            brand_id=Brand.query.filter_by(name="Puma").first().id,
-        ),
-         Product(
-            name="Вітровка Adidas Originals RUCHED BOMBER",
-            description="Колекція Adidas Originals створена для тих, хто не боїться виділятися, хто впевнено крокує вулицями мегаполіса та цінує бездоганний стиль у кожній деталі.",
-            price=3999,
-            new_price=2999,
-            gender='woman',
-            color='gray',
-            quantity=5,
-            article='p11',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='outerwear').first().id,
-            brand_id=Brand.query.filter_by(name="Adidas").first().id,
-        ),
         Product(
             name="Вітровка Nike M NK RPL MILER JKT",
-            description="Вітрівка Nike M Nk Rpl Miler Jkt відтворює класичний дизайн Windrunner та стане чудовим вибором для Ваших пробіжок. Виготовлена з якісного матеріалу, який має водовідштовхувальне покриття, що дозволить Вам займатись бігом у вологу погоду.",
+            description="Вітрівка Nike M Nk Rpl Miler Jkt відтворює класичний дизайн Windrunner та стане чудовим вибором для Ваших пробіжок.",
             price=4570,
             gender='man',
             color='black',
-            quantity=12,
-            article='p12',
+            quantity=99,
+            article='p2',
             sizes=["S", "M", "L", "XL"],
             subcategory_id=SubCategory.query.filter_by(name='outerwear').first().id,
             brand_id=Brand.query.filter_by(name="Nike").first().id,
         ),
-         Product(
-            name="Вітровка Nike M NK TCH WVN WR FZ JKT",
-            description="Колекція Windrunner стала справжньою легендою ще в 1978 році, коли Nike вперше представила бігові куртки, які поєднували стиль і функціональність.",
-            price=6970,
-            new_price=5999,
-            gender='man',
-            color='green',
-            quantity=12,
-            article='p13',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='outerwear').first().id,
-            brand_id=Brand.query.filter_by(name="Nike").first().id,
-        ),
         Product(
-            name="Вітровка Nike M NK WVN LND WR HD JKT",
-            description="Колекція Windrunner стала обличчям одягу Nike у 1978 році. Товари колекції спочатку створювались як бігові куртки, які з часом перетворилися на повсякденний одяг.",
-            price=5200,
-            new_price=4599,
+            name="Вітровка New Balance Woven Track Jacket",
+            description="Вітрівка New Balance Woven Track Jacket — це ідеальне поєднання ретро-естетики та сучасного комфорту. Натхненна баскетбольними традиціями бренду.",
+            price=5390,
+            new_price=4570,
             gender='man',
-            color='black',
-            quantity=12,
-            article='p14',
-            sizes=["S", "M", "L"],
+            color='gray',
+            quantity=99,
+            article='p3',
+            sizes=["S", "M", "L", "XL"],
             subcategory_id=SubCategory.query.filter_by(name='outerwear').first().id,
-            brand_id=Brand.query.filter_by(name="Nike").first().id,
-        ),
-         Product(
-            name="Футболка Nike M NSW TEE M90 NK AIR SP25 2 172086",
-            description="Склад:100% бавовна.Колір:Чорний.Сезон:Весна-Літо 2025, Літо.",
-            price=2200,
-            gender='man',
-            color='black',
-            quantity=14,
-            article='p15',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
-            brand_id=Brand.query.filter_by(name="Nike").first().id,
-        ),
-        Product(
-            name="Футболка New Balance Sport Essentials Gradient Logo T-Shirt",
-            description="Склад:100% бавовна.Колір:Чорний.Сезон:Весна-Літо 2025, Літо.",
-            price=1209,
-            gender='man',
-            color='black',
-            quantity=5,
-            article='p16',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
             brand_id=Brand.query.filter_by(name="NewBalance").first().id,
         ),
         Product(
-            name="Футболка Puma GRAPHICS Moto Relaxed Tee",
-            description="Склад:100% бавовна.Колір:Чорний.Сезон:Весна-Літо 2025, Літо.",
-            price=1209,
+            name="Вітровка Puma SPORT Windbreaker",
+            description="Вітрівка Puma Sport Windbreaker стане Вашим незамінним супутником у динамічному ритмі життя, поєднуючи стиль та комфорт.",
+            price=3600,
+            new_price=2999,
             gender='man',
-            color='white',
-            quantity=5,
-            article='p17',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
-            brand_id=Brand.query.filter_by(name="Puma").first().id,
-        ),
-         Product(
-            name="Футболка Adidas Originals JUVE ICON JSY",
-            description="У 2015 році Adidas став титульним спонсором Ювентуса — клубу, який впродовж десятиліть писав історію світового футболу.",
-            price=3700,
-            new_price=2999,
-            gender='all',
-            color='blue',
-            quantity=5,
-            article='p18',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
-            brand_id=Brand.query.filter_by(name="Adidas").first().id,
-        ),
-         Product(
-            name="Футболка Nike W NSW NK CHLL KNT MD CRP",
-            description="Футболка Nike W Nsw Nk Chll Knt Md Crp – це справжній маст-хев для створення легких і стильних літніх образів.",
-            price=1250,
-            gender='woman',
-            color='white',
-            quantity=5,
-            article='p19',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
-            brand_id=Brand.query.filter_by(name="Nike").first().id,
-        ),
-         Product(
-            name="Футболка Adidas Originals 3 S BABY TEE ",
-            description="Колекція Adidas Originals створена для тих, хто не боїться виділятися, хто впевнено крокує вулицями мегаполіса та цінує бездоганний стиль у кожній деталі.",
-            price=1250,
-            gender='woman',
             color='black',
-            quantity=5,
-            article='p20',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
-            brand_id=Brand.query.filter_by(name="Adidas").first().id,
-        ),
-         Product(
-            name="Вітровка Puma DARE TO Oversized Zip-Off Woven Jacket",
-            description="Колекція Adidas Originals створена для тих, хто не боїться виділятися, хто впевнено крокує вулицями мегаполіса та цінує бездоганний стиль у кожній деталі.",
-            price=3999,
-            new_price=2999,
-            gender='woman',
-            color='white',
-            quantity=5,
-            article='p21',
-            sizes=["S", "M", "L"],
+            quantity=99,
+            article='p4',
+            sizes=["S", "M", "L", "XL"],
             subcategory_id=SubCategory.query.filter_by(name='outerwear').first().id,
             brand_id=Brand.query.filter_by(name="Puma").first().id,
         ),
-         Product(
-            name="Вітровка Adidas Originals RUCHED BOMBER",
+        Product(
+            name="Поло Adidas Originals ESS POLO TEE",
+            description="Поло New Balance Cotton Pique Polo – це бездоганне поєднання стилю та універсальності, яке стане незамінною частиною Вашого гардероба.",
+            price=2599,
+            new_price=1999,
+            gender='man',
+            color='black',
+            quantity=99,
+            article='p5',
+            sizes=["S", "M", "L", "XL"],
+            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
+            brand_id=Brand.query.filter_by(name="Adidas").first().id,
+        ),
+        Product(
+            name="Поло New Balance Cotton Pique Polo 170951",
             description="Колекція Adidas Originals створена для тих, хто не боїться виділятися, хто впевнено крокує вулицями мегаполіса та цінує бездоганний стиль у кожній деталі.",
-            price=3999,
-            new_price=2999,
-            gender='woman',
-            color='gray',
-            quantity=5,
-            article='p22',
-            sizes=["S", "M", "L"],
-            subcategory_id=SubCategory.query.filter_by(name='outerwear').first().id,
+            price=2599,
+            gender='man',
+            color='black',
+            quantity=99,
+            article='p6',
+            sizes=["S", "M", "L", "XL"],
+            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
             brand_id=Brand.query.filter_by(name="Adidas").first().id,
         ),
-
-         Product(
-            name="Кросівки Nike AIR MAX 90 DRIFT",
-            description="Кросівки Nike Air Max 90 Drift — це переосмислення легендарного стилю 90-х у сучасному виконанні.",
-            price=3999,
-            gender='man',
-            color='green',
-            quantity=5,
-            article='p23',
-            sizes=["41", "42", "43", "44"],
-            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
-            brand_id=Brand.query.filter_by(name="Nike").first().id,
-        ),
         Product(
-            name="Кросівки Nike AIR MAX PLUS",
-            description="Кросівки Nike Air Max Plus — це вибуховий мікс стилю, комфорту та натхнення, яке йде від самої природи. Їхній унікальний дизайн із хвилястими лініями, що нагадують океанські бризи та гнучкі силуети пальм.",
-            price=9999,
+            name="Поло Puma BMW MMS POLO",
+            description="Колекція Puma BMW M Motorsport — це справжнє втілення швидкості, стилю та інновацій.",
+            price=2599,
             gender='man',
             color='black',
-            quantity=5,
-            article='p24',
-            sizes=["40", "41", "43", "44"],
-            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
-            brand_id=Brand.query.filter_by(name="Nike").first().id,
+            quantity=99,
+            article='p7',
+            sizes=["S", "M", "L", "XL"],
+            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
+            brand_id=Brand.query.filter_by(name="Puma").first().id,
         ),
         Product(
-            name="Кросівки New Balance model 1000 Cordura",
-            description="Кросівки New Balance model 1000 Cordura – це поєднання сміливого ретро-дизайну та передових технологій, натхненне футуристичним стилем архівних моделей.",
-            price=9999,
-            new_price=8999,
+            name="Поло Adidas Originals ESS POLO TEE",
+            description="Колекція Adidas Originals створена для тих, хто не боїться виділятися.",
+            price=1999,
             gender='man',
-            color='black',
-            quantity=5,
-            article='p25',
-            sizes=["40", "41", "42", "43", "44"],
-            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
-            brand_id=Brand.query.filter_by(name="NewBalance").first().id,
-        ),
-         Product(
-            name="Кросівки Adidas TERREX TRAILMAKER",
-            description="Колекція Adidas Terrex створена для любителів активного відпочинку на природі та гарантує комфорт у будь-яких умовах.",
-            price=9999,
-            new_price=8999,
-            gender='all',
-            color='gray',
-            quantity=5,
-            article='p26',
-            sizes=["37", "38", "39", "40", "41", "42", "43", "44"],
-            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
+            color='white',
+            quantity=99,
+            article='p8',
+            sizes=["S", "M", "L", "XL"],
+            subcategory_id=SubCategory.query.filter_by(name='t-shirts').first().id,
             brand_id=Brand.query.filter_by(name="Adidas").first().id,
         ),
-         Product(
-            name="Кросівки Nike AIR MAX 90 DRIFT",
-            description="Кросівки Nike Air Max 90 Drift — це переосмислення легендарного стилю 90-х у сучасному виконанні.",
-            price=3999,
+        Product(
+            name="Шорти Nike M NK DF CHALLENGER 9UL SHORT",
+            description="Шорти Nike M Nk Df Challenger 9ul Short стануть комфортним завершенням Ваших спортивних образів для бігу.",
+            price=2050,
+            new_price=1879,
             gender='man',
-            color='green',
-            quantity=5,
-            article='p27',
-            sizes=["41", "42", "43", "44"],
-            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
+            color='black',
+            quantity=99,
+            article='p9',
+            sizes=["S", "M", "L", "XL", "XXL"],
+            subcategory_id=SubCategory.query.filter_by(name='shorts').first().id,
             brand_id=Brand.query.filter_by(name="Nike").first().id,
         ),
         Product(
-            name="Кросівки Nike AIR MAX PLUS",
-            description="Кросівки Nike Air Max Plus — це вибуховий мікс стилю, комфорту та натхнення, яке йде від самої природи. Їхній унікальний дизайн із хвилястими лініями, що нагадують океанські бризи та гнучкі силуети пальм.",
-            price=9999,
-            gender='man',
-            color='black',
-            quantity=5,
-            article='p28',
-            sizes=["40", "41", "43", "44"],
-            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
-            brand_id=Brand.query.filter_by(name="Nike").first().id,
-        ),
-        Product(
-            name="Кросівки New Balance model 1000 Cordura",
-            description="Кросівки New Balance model 1000 Cordura – це поєднання сміливого ретро-дизайну та передових технологій, натхненне футуристичним стилем архівних моделей.",
-            price=9999,
-            new_price=8999,
-            gender='man',
-            color='black',
-            quantity=5,
-            article='p29',
-            sizes=["40", "41", "42", "43", "44"],
-            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
-            brand_id=Brand.query.filter_by(name="NewBalance").first().id,
-        ),
-         Product(
-            name="Кросівки Adidas TERREX TRAILMAKER",
-            description="Колекція Adidas Terrex створена для любителів активного відпочинку на природі та гарантує комфорт у будь-яких умовах.",
-            price=9999,
-            new_price=8999,
-            gender='all',
-            color='gray',
-            quantity=5,
-            article='p30',
-            sizes=["37", "38", "39", "40", "41", "42", "43", "44"],
-            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
-            brand_id=Brand.query.filter_by(name="Adidas").first().id,
-        ),
-         Product(
-            name="Кросівки Nike AIR MAX 90 DRIFT",
-            description="Кросівки Nike Air Max 90 Drift — це переосмислення легендарного стилю 90-х у сучасному виконанні.",
-            price=3999,
-            gender='man',
-            color='green',
-            quantity=5,
-            article='p31',
-            sizes=["41", "42", "43", "44"],
-            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
-            brand_id=Brand.query.filter_by(name="Nike").first().id,
-        ),
-        Product(
-            name="Кросівки Nike AIR MAX PLUS",
-            description="Кросівки Nike Air Max Plus — це вибуховий мікс стилю, комфорту та натхнення, яке йде від самої природи. Їхній унікальний дизайн із хвилястими лініями, що нагадують океанські бризи та гнучкі силуети пальм.",
-            price=9999,
-            gender='man',
-            color='black',
-            quantity=5,
-            article='p32',
-            sizes=["40", "41", "43", "44"],
-            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
-            brand_id=Brand.query.filter_by(name="Nike").first().id,
-        ),
-        Product(
-            name="Кросівки New Balance model 1000 Cordura",
-            description="Кросівки New Balance model 1000 Cordura – це поєднання сміливого ретро-дизайну та передових технологій, натхненне футуристичним стилем архівних моделей.",
-            price=9999,
-            new_price=8999,
-            gender='man',
-            color='black',
-            quantity=5,
-            article='p33',
-            sizes=["40", "41", "42", "43", "44"],
-            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
-            brand_id=Brand.query.filter_by(name="NewBalance").first().id,
-        ),
-         Product(
-            name="Кросівки Adidas TERREX TRAILMAKER",
-            description="Колекція Adidas Terrex створена для любителів активного відпочинку на природі та гарантує комфорт у будь-яких умовах.",
-            price=9999,
-            new_price=8999,
-            gender='all',
-            color='gray',
-            quantity=5,
-            article='p34',
-            sizes=["37", "38", "39", "40", "41", "42", "43", "44"],
-            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
-            brand_id=Brand.query.filter_by(name="Adidas").first().id,
-        ),
-         Product(
-            name="Рюкзак Nike Brasilia 9.5",
-            description="Рюкзак Nike Brasilia 9.5 оснащений всім необхідним, щоб Ви мали змогу розкласти необхідне спорядження окремо для зручного та швидкого пошуку.",
+            name="Шорти Puma M CLOUDSPUN BRANDED 5 SHORT",
+            description="Шорти Puma M Cloudspun Branded 5 Short створені для того, щоб Ви були зосередженими та готовими до нових звершень під час тренувань.",
             price=2999,
-            gender='all',
+            new_price=2439,
+            gender='man',
             color='black',
-            quantity=5,
-            article='p35',
-            subcategory_id=SubCategory.query.filter_by(name='backpacks').first().id,
+            quantity=99,
+            article='p10',
+            sizes=["S", "M", "L", "XL", "XXL"],
+            subcategory_id=SubCategory.query.filter_by(name='shorts').first().id,
+            brand_id=Brand.query.filter_by(name="Puma").first().id,
+        ),
+        Product(
+            name="Кросівки Nike Air Max Plus",
+            description="Склад:100% текстиль; Пiдошва: 80% гума, 20% пластик; Колір:Чорний; Сезон:Весна-Літо 2025, Демисезон.",
+            price=11999,
+            new_price=10568,
+            gender='man',
+            color='black',
+            quantity=99,
+            article='p11',
+            sizes=["39", "40", "41", "42", "43"],
+            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
             brand_id=Brand.query.filter_by(name="Nike").first().id,
         ),
-       
+        Product(
+            name="Кросівки Nike AIR MAX 90 DRIFT",
+            description="Склад:100% текстиль; Пiдошва: 80% гума, 20% пластик; Колір:Чорний; Сезон:Весна-Літо 2025, Демисезон.",
+            price=8280,
+            gender='man',
+            color='green',
+            quantity=99,
+            article='p12',
+            sizes=["39", "40", "41", "42", "43", "44"],
+            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
+            brand_id=Brand.query.filter_by(name="Nike").first().id,
+        ),
+        Product(
+            name="Кросівки Nike Air Max Plus",
+            description="Кросівки Nike Air Max Plus стануть стильним акцентом Вашого повсякденного образу, додаючи відчуття свободи та натхнення пляжної атмосфери.",
+            price=8280,
+            gender='woman',
+            color='white',
+            quantity=99,
+            article='p13',
+            sizes=["36", "37", "38", "39", "40"],
+            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
+            brand_id=Brand.query.filter_by(name="Nike").first().id,
+        ),
+        Product(
+            name="Кросівки Puma Inverse Premium Wns",
+            description="Склад:Верх: 70,78% текстиль, 29,22% шкіра / Підошва: гума; Колір:Сірий;Сезон:Весна-Літо 2025, Літо, Демисезон;",
+            price=6390,
+            new_price=5999,
+            gender='woman',
+            color='white',
+            quantity=99,
+            article='p14',
+            sizes=["36", "37", "38", "39", "40"],
+            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
+            brand_id=Brand.query.filter_by(name="Puma").first().id,
+        ),
+        Product(
+            name="Вітровка Nike W NSW ESSNTL UV WVN JKT HD",
+            description="Вітрівка Nike W Nsw Essntl Uv Wvn Jkt Hd – це поєднання стилю, комфорту та функціональності, яке стане незамінним у Вашому гардеробі.",
+            price=3780,
+            gender='woman',
+            color='black',
+            quantity=99,
+            article='p15',
+            sizes=["XS", "S", "M", "L"],
+            subcategory_id=SubCategory.query.filter_by(name='outerwear').first().id,
+            brand_id=Brand.query.filter_by(name="Nike").first().id,
+        ),
+        Product(
+            name="Вітровка Adidas RUN IT JACKET",
+            description="Вітрівка це поєднання стилю, комфорту та функціональності, яке стане незамінним у Вашому гардеробі.",
+            price=3390,
+            gender='woman',
+            color='black',
+            quantity=99,
+            article='p16',
+            sizes=["XS", "S", "M", "L"],
+            subcategory_id=SubCategory.query.filter_by(name='outerwear').first().id,
+            brand_id=Brand.query.filter_by(name="Adidas").first().id,
+        ),
+        Product(
+            name="Вітровка Puma Relaxed Windbreaker",
+            description="Вітрівка Puma Relaxed Windbreaker стане Вашим надійним партнером у будь-якій ситуації – чи то активний день у місті або несподівана пригода.",
+            price=2659,
+            gender='woman',
+            color='black',
+            quantity=99,
+            article='p17',
+            sizes=["XS", "S", "M", "L"],
+            subcategory_id=SubCategory.query.filter_by(name='outerwear').first().id,
+            brand_id=Brand.query.filter_by(name="Puma").first().id,
+        ),
+        Product(
+            name="Кросівки Nike WMNS INITIATOR TRK3",
+            description="Кросівки Nike Wmns Initiator Trk3 зачаровують оригінальним дизайном в стилі ретро з сучасними елементами та подарують відчуття легкості кожному Вашому кроку під час пробіжок.",
+            price=4599,
+            gender='all',
+            color='white',
+            quantity=99,
+            article='p18',
+            sizes=["36", "37", "38", "39", "40", "41", "42", "43", "44"],
+            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
+            brand_id=Brand.query.filter_by(name="Nike").first().id,
+        ),
+        Product(
+            name="Кросівки Nike W CORTEZ TXT",
+            description="Моделі Nike Cortez були розроблені в 1972 році співзасновником Nike Біллом Бауерманом. Вони швидко стали найпопулярнішим вибором для бігу та перетворились на впізнавану ікону.",
+            price=4599,
+            new_price=3999,
+            gender='woman',
+            color='black',
+            quantity=99,
+            article='p19',
+            sizes=["40", "41", "42", "43", "44"],
+            subcategory_id=SubCategory.query.filter_by(name='sneakers').first().id,
+            brand_id=Brand.query.filter_by(name="Nike").first().id,
+        ),
+         Product(
+            name="Кепка Puma FERRARI RACE PRO BB Cap",
+            description="Колекція Puma Ferrari поєднує в собі елегантність і швидкість, відображаючи дух легендарної марки.",
+            price=1999,
+            gender='man',
+            color='black',
+            quantity=99,
+            article='p20',
+            sizes=[],
+            subcategory_id=SubCategory.query.filter_by(name='baseball-caps').first().id,
+            brand_id=Brand.query.filter_by(name="Puma").first().id,
+        ),
+         Product(
+            name="Кепка Nike U NK DFADV FLY CAP U AB RFLTV",
+            description="Кепка Nike U Nk Dfadv Fly Cap U Ab Rfltv зробить будь-які Ваші тренування на свіжому повітрі максимально комфортними.",
+            price=1690,
+            gender='all',
+            color='black',
+            quantity=99,
+            article='p21',
+            sizes=[],
+            subcategory_id=SubCategory.query.filter_by(name='baseball-caps').first().id,
+            brand_id=Brand.query.filter_by(name="Nike").first().id,
+        )
     ]
 
     if Product.query.count() == 0:
@@ -532,459 +355,287 @@ def sead_db():
 
     images = [
         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/64fb13c792f91-68e7b68.jpeg",
-            product_id = products[0].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/64fb13cdf4118-68e7b68.jpeg",
-            product_id = products[0].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/64fb13db731c5-68e7b68.jpeg",
-            product_id = products[0].id
-        ),
-
-         ProductImage(
             path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cee0ced9bb6-68e7b68.jpeg",
-            product_id = products[1].id
+            product_id = products[0].id
         ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cee0cddda34-68e7b68.jpeg",
-            product_id = products[1].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cee0d07bfac-68e7b68.jpeg",
-            product_id = products[1].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/663b33f2e1a0a-68e7b68.jpeg",
-            product_id = products[2].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/663b33f309e1e-68e7b68.jpeg",
-            product_id = products[2].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/663b33f2919b8-68e7b68.jpeg",
-            product_id = products[2].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cebea2266f6-68e7b68.jpeg",
-            product_id = products[3].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cebea1cf212-68e7b68.jpeg",
-            product_id = products[3].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cebe9fb7ef7-68e7b68.jpeg",
-            product_id = products[3].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c8624b8125b-68e7b68.jpeg",
-            product_id = products[4].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c8624a3879c-68e7b68.jpeg",
-            product_id = products[4].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c862467c6e4-68e7b68.jpeg",
-            product_id = products[4].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67d000f715f57-68e7b68.jpeg",
-            product_id = products[5].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67d000fc260e9-68e7b68.jpeg",
-            product_id = products[5].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67d000f61032f-68e7b68.jpeg",
-            product_id = products[5].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67dbe4af334ed-68e7b68.jpeg",
-            product_id = products[6].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67dbe4af28820-68e7b68.jpeg",
-            product_id = products[6].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67dbe4b031207-68e7b68.jpeg",
-            product_id = products[6].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67812cab5cc0d-68e7b68.jpeg",
-            product_id = products[7].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67812caaaee0d-68e7b68.jpeg",
-            product_id = products[7].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67812c91d23ac-68e7b68.jpeg",
-            product_id = products[7].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b83e39e9a01-68e7b68.jpeg",
-            product_id = products[8].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b83e381f16d-68e7b68.jpeg",
-            product_id = products[8].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b83e38267e8-68e7b68.jpeg",
-            product_id = products[8].id
-        ),
-
-        
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cfe40cbb0ab-68e7b68.jpeg",
-            product_id = products[9].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cfe3f9258d6-68e7b68.jpeg",
-            product_id = products[9].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cfe3f8168e4-68e7b68.jpeg",
-            product_id = products[9].id
-        ),
-
         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67caaf00ad3b6-68e7b68.jpeg",
-            product_id = products[10].id
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cee0cb78153-68e7b68.jpeg",
+            product_id = products[0].id
         ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67caaf018105f-68e7b68.jpeg",
-            product_id = products[10].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67caaf0025ec1-68e7b68.jpeg",
-            product_id = products[10].id
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cee0d3b8201-68e7b68.jpeg",
+            product_id = products[0].id
         ),
 
         ProductImage(
             path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/64fb13c792f91-68e7b68.jpeg",
-            product_id = products[11].id
+            product_id = products[1].id
         ),
-         ProductImage(
+        ProductImage(
             path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/64fb13cdf4118-68e7b68.jpeg",
-            product_id = products[11].id
+            product_id = products[1].id
         ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/64fb13db731c5-68e7b68.jpeg",
-            product_id = products[11].id
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/64fb13c76f811-68e7b68.jpeg",
+            product_id = products[1].id
         ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cee0ced9bb6-68e7b68.jpeg",
-            product_id = products[12].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cee0cddda34-68e7b68.jpeg",
-            product_id = products[12].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cee0d07bfac-68e7b68.jpeg",
-            product_id = products[12].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/663b33f2e1a0a-68e7b68.jpeg",
-            product_id = products[13].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/663b33f309e1e-68e7b68.jpeg",
-            product_id = products[13].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/663b33f2919b8-68e7b68.jpeg",
-            product_id = products[13].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cebea2266f6-68e7b68.jpeg",
-            product_id = products[14].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cebea1cf212-68e7b68.jpeg",
-            product_id = products[14].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cebe9fb7ef7-68e7b68.jpeg",
-            product_id = products[14].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c8624b8125b-68e7b68.jpeg",
-            product_id = products[15].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c8624a3879c-68e7b68.jpeg",
-            product_id = products[15].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c862467c6e4-68e7b68.jpeg",
-            product_id = products[15].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67d000f715f57-68e7b68.jpeg",
-            product_id = products[16].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67d000fc260e9-68e7b68.jpeg",
-            product_id = products[16].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67d000f61032f-68e7b68.jpeg",
-            product_id = products[16].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67dbe4af334ed-68e7b68.jpeg",
-            product_id = products[17].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67dbe4af28820-68e7b68.jpeg",
-            product_id = products[17].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67dbe4b031207-68e7b68.jpeg",
-            product_id = products[17].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67812cab5cc0d-68e7b68.jpeg",
-            product_id = products[18].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67812caaaee0d-68e7b68.jpeg",
-            product_id = products[18].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67812c91d23ac-68e7b68.jpeg",
-            product_id = products[18].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b83e39e9a01-68e7b68.jpeg",
-            product_id = products[19].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b83e381f16d-68e7b68.jpeg",
-            product_id = products[19].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b83e38267e8-68e7b68.jpeg",
-            product_id = products[19].id
-        ),
-
         
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cfe40cbb0ab-68e7b68.jpeg",
-            product_id = products[20].id
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/679ccfc07e370-68e7b68.jpeg",
+            product_id = products[2].id
         ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cfe3f9258d6-68e7b68.jpeg",
-            product_id = products[20].id
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/679ccfc1742bf-68e7b68.jpeg",
+            product_id = products[2].id
         ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67cfe3f8168e4-68e7b68.jpeg",
-            product_id = products[20].id
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/679ccfb8d5cc7-68e7b68.jpeg",
+            product_id = products[2].id
         ),
 
         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67caaf00ad3b6-68e7b68.jpeg",
-            product_id = products[21].id
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c5b7b892d29-68e7b68.jpeg",
+            product_id = products[3].id
         ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67caaf018105f-68e7b68.jpeg",
-            product_id = products[21].id
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c5b7b9bc775-68e7b68.jpeg",
+            product_id = products[3].id
         ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67caaf0025ec1-68e7b68.jpeg",
-            product_id = products[21].id
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c5b7b9482ed-68e7b68.jpeg",
+            product_id = products[3].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c5b7bbba680-68e7b68.jpeg",
+            product_id = products[3].id
+        ),
+
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c5b7b892d29-68e7b68.jpeg",
+            product_id = products[3].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c5b7b9bc775-68e7b68.jpeg",
+            product_id = products[3].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c5b7b9482ed-68e7b68.jpeg",
+            product_id = products[3].id
         ),
 
          ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/679cbe9ab110d-68e7b68.jpeg",
+            product_id = products[4].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/679cbea07b992-68e7b68.jpeg",
+            product_id = products[4].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/679cbe8c8c648-68e7b68.jpeg",
+            product_id = products[4].id
+        ),
+       
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67caaefbbb0a5-68e7b68.jpeg",
+            product_id = products[5].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67caaf02e9a03-68e7b68.jpeg",
+            product_id = products[5].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67caaefa41a0b-68e7b68.jpeg",
+            product_id = products[5].id
+        ),
+
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67bdae12207e7-68e7b68.jpeg",
+            product_id = products[6].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67bdae0f8b4a4-68e7b68.jpeg",
+            product_id = products[6].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67bdae0e79fe2-68e7b68.jpeg",
+            product_id = products[6].id
+        ),
+
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67e56ca482153-68e7b68.jpeg",
+            product_id = products[7].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67e56ca7f3307-68e7b68.jpeg",
+            product_id = products[7].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67e56c9cc592e-68e7b68.jpeg",
+            product_id = products[7].id
+        ),
+
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67f63bb7b63a0-68e7b68.jpeg",
+            product_id = products[8].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67724a760fadd-68e7b68.jpeg",
+            product_id = products[8].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67724a70647a8-68e7b68.jpeg",
+            product_id = products[8].id
+        ),
+
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/6787bba1962a6-68e7b68.jpeg",
+            product_id = products[9].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/6787bb9d88096-68e7b68.jpeg",
+            product_id = products[9].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/6787bbb5335c3-68e7b68.jpeg",
+            product_id = products[9].id
+        ),
+
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/65fada610da95-68e7b68.jpeg",
+            product_id = products[10].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/65fada6092503-68e7b68.jpeg",
+            product_id = products[10].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/65fada6118542-68e7b68.jpeg",
+            product_id = products[10].id
+        ),
+
+        ProductImage(
             path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67a0d87c7ec03-68e7b68.jpeg",
-            product_id = products[22].id
+            product_id = products[11].id
         ),
-         ProductImage(
+        ProductImage(
             path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67a0d87cd178d-68e7b68.jpeg",
-            product_id = products[22].id
+            product_id = products[11].id
         ),
-         ProductImage(
+        ProductImage(
             path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67a0d8838307f-68e7b68.jpeg",
-            product_id = products[22].id
+            product_id = products[11].id
+        ),
+
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/678a5c404584d-68e7b68.jpeg",
+            product_id = products[12].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/678a5c3a286f3-68e7b68.jpeg",
+            product_id = products[12].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/678a5c3f523d9-68e7b68.jpeg",
+            product_id = products[12].id
+        ),
+
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67e3d6e1ed1c6-68e7b68.jpeg",
+            product_id = products[13].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67e3d6ec28656-68e7b68.jpeg",
+            product_id = products[13].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67e3d6dfc04a5-68e7b68.jpeg",
+            product_id = products[13].id
+        ),
+
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67aca152ccd04-68e7b68.jpeg",
+            product_id = products[14].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67aca144bb8e3-68e7b68.jpeg",
+            product_id = products[14].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67aca15779e12-68e7b68.jpeg",
+            product_id = products[14].id
+        ),
+
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67e52ad76ea48-68e7b68.jpeg",
+            product_id = products[15].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67e52ad9d4d88-68e7b68.jpeg",
+            product_id = products[15].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67e52acf29081-68e7b68.jpeg",
+            product_id = products[15].id
+        ),
+
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c5be643451d-68e7b68.jpeg",
+            product_id = products[16].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c5be640c3af-68e7b68.jpeg",
+            product_id = products[16].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67c5be601aea7-68e7b68.jpeg",
+            product_id = products[16].id
+        ),
+
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/677ce1be1c4ae-68e7b68.jpeg",
+            product_id = products[17].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/677ce1bd669c8-68e7b68.jpeg",
+            product_id = products[17].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/677ce1c060b20-68e7b68.jpeg",
+            product_id = products[17].id
+        ),
+
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/677ba4a32cf1a-68e7b68.jpeg",
+            product_id = products[18].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/677ba4a130a01-68e7b68.jpeg",
+            product_id = products[18].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/677ba4a04c4ca-68e7b68.jpeg",
+            product_id = products[18].id
+        ),
+    
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/679a24150db8a-68e7b68.jpeg",
+            product_id = products[19].id
+        ),
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/679a2418ccec0-68e7b68.jpeg",
+            product_id = products[19].id
         ),
 
          ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b884ad63626-68e7b68.jpeg",
-            product_id = products[23].id
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/660d3d3262fc7-68e7b68.jpeg",
+            product_id = products[20].id
         ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b884ae9c59c-68e7b68.jpeg",
-            product_id = products[23].id
+        ProductImage(
+            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/660d3d330f63d-68e7b68.jpeg",
+            product_id = products[20].id
         ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b884af03853-68e7b68.jpeg",
-            product_id = products[23].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b480928cb3a-68e7b68.jpeg",
-            product_id = products[24].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b480a372ae6-68e7b68.jpeg",
-            product_id = products[24].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b48098b521b-68e7b68.jpeg",
-            product_id = products[24].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b73a5d89828-68e7b68.jpeg",
-            product_id = products[25].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b73a603418f-68e7b68.jpeg",
-            product_id = products[25].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b73a5bad375-68e7b68.jpeg",
-            product_id = products[25].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67a0d87c7ec03-68e7b68.jpeg",
-            product_id = products[26].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67a0d87cd178d-68e7b68.jpeg",
-            product_id = products[26].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67a0d8838307f-68e7b68.jpeg",
-            product_id = products[26].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b884ad63626-68e7b68.jpeg",
-            product_id = products[27].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b884ae9c59c-68e7b68.jpeg",
-            product_id = products[27].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b884af03853-68e7b68.jpeg",
-            product_id = products[27].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b480928cb3a-68e7b68.jpeg",
-            product_id = products[28].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b480a372ae6-68e7b68.jpeg",
-            product_id = products[28].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b48098b521b-68e7b68.jpeg",
-            product_id = products[28].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b73a5d89828-68e7b68.jpeg",
-            product_id = products[29].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b73a603418f-68e7b68.jpeg",
-            product_id = products[29].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b73a5bad375-68e7b68.jpeg",
-            product_id = products[29].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67a0d87c7ec03-68e7b68.jpeg",
-            product_id = products[30].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67a0d87cd178d-68e7b68.jpeg",
-            product_id = products[30].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67a0d8838307f-68e7b68.jpeg",
-            product_id = products[30].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b884ad63626-68e7b68.jpeg",
-            product_id = products[31].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b884ae9c59c-68e7b68.jpeg",
-            product_id = products[31].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b884af03853-68e7b68.jpeg",
-            product_id = products[31].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b480928cb3a-68e7b68.jpeg",
-            product_id = products[32].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b480a372ae6-68e7b68.jpeg",
-            product_id = products[32].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b48098b521b-68e7b68.jpeg",
-            product_id = products[32].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b73a5d89828-68e7b68.jpeg",
-            product_id = products[33].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b73a603418f-68e7b68.jpeg",
-            product_id = products[33].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67b73a5bad375-68e7b68.jpeg",
-            product_id = products[33].id
-        ),
-
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/67f8dc80c487f-68e7b68.jpeg",
-            product_id = products[34].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/6628ed65b4c20-68e7b68.jpeg",
-            product_id = products[34].id
-        ),
-         ProductImage(
-            path = "https://megasport.ua/api/s3/images/megasport-dev/products/3555570144/6628ed666576c-68e7b68.jpeg",
-            product_id = products[34].id
-        ),
+    
     ]
 
     if ProductImage.query.count() == 0:
